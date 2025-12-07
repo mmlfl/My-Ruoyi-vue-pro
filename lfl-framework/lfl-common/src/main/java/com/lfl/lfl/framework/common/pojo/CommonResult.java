@@ -1,6 +1,6 @@
-package com.lfl.yudao.server.pojo;
+package com.lfl.lfl.framework.common.pojo;
 
-import com.lfl.yudao.server.exception.ErrorCodeEnum;
+import com.lfl.lfl.framework.common.exception.enums.ErrorCodeEnum;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -38,3 +38,4 @@ public class CommonResult<T> implements Serializable {
     }
 
 }
+

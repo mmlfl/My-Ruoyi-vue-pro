@@ -3,7 +3,7 @@ package com.lfl.yudao.server.service.impl;
 import cn.hutool.core.lang.UUID;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.lfl.yudao.server.exception.ErrorCodeEnum;
+import com.lfl.lfl.framework.common.exception.enums.ErrorCodeEnum;
 import com.lfl.yudao.server.mapper.UserMapper;
 import com.lfl.yudao.server.pojo.DAO.LoginUserRedisDAO;
 import com.lfl.yudao.server.pojo.DO.User;

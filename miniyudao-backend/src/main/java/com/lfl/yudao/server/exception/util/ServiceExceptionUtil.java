@@ -1,6 +1,6 @@
 package com.lfl.yudao.server.exception.util;
 
-import com.lfl.yudao.server.exception.ErrorCodeEnum;
+import com.lfl.lfl.framework.common.exception.enums.ErrorCodeEnum;
 import com.lfl.yudao.server.exception.ServiceException;
 
 public class ServiceExceptionUtil {

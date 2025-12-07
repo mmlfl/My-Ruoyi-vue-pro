@@ -11,6 +11,10 @@
 
     <artifactId>lfl-spring-boot-starter-security</artifactId>
 
+    <description>
+        1. security：用户的认证、权限的校验，实现「谁」可以做「什么事」
+    </description>
+
     <dependencies>
         <dependency>
             <groupId>com.lfl</groupId>

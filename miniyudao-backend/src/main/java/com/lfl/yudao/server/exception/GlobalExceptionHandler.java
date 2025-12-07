@@ -2,16 +2,14 @@ package com.lfl.yudao.server.exception;
 
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.StrUtil;
-import com.lfl.yudao.server.pojo.CommonResult;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import com.lfl.lfl.framework.common.pojo.CommonResult;
 
 import java.util.List;
-
-import static com.lfl.yudao.server.exception.ErrorCodeEnum.*;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {
