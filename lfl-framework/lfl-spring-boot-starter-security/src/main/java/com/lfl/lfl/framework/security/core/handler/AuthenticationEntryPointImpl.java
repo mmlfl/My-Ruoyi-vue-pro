@@ -20,6 +20,6 @@ public class AuthenticationEntryPointImpl implements AuthenticationEntryPoint {
         log.debug("[commence][访问 URL({}) 时，没有登录]", request.getRequestURI(), e);
 
         //返回401
-        return ServletUtils.writeJSON(response, CommonResult.error(ErrorCodeEnum.UNAUTHORIZED));
+        ServletUtils.writeJSON(response, CommonResult.error(ErrorCodeEnum.UNAUTHORIZED));
     }
 }

@@ -11,6 +11,8 @@ import com.lfl.lfl.framework.common.pojo.CommonResult;
 
 import java.util.List;
 
+import static com.lfl.lfl.framework.common.exception.enums.ErrorCodeEnum.BADREQUEST;
+
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
