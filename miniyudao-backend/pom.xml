@@ -19,9 +19,10 @@
             <version>2025.10-jdk8-SNAPSHOT</version>
         </dependency>
 
+        <!--该模块依赖已经包含了web相关依赖了-->
         <dependency>
             <groupId>com.lfl</groupId>
-            <artifactId>lfl-spring-boot-starter-web</artifactId>
+            <artifactId>lfl-spring-boot-starter-security</artifactId>
         </dependency>
         <dependency>
             <groupId>com.baomidou</groupId>

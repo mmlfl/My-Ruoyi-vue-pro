@@ -3,7 +3,6 @@ package com.lfl.lfl.framework.security.core.handler;
 import com.lfl.lfl.framework.common.exception.enums.ErrorCodeEnum;
 import com.lfl.lfl.framework.common.pojo.CommonResult;
 import com.lfl.lfl.framework.common.util.servlet.ServletUtils;
-import com.lfl.lfl.framework.security.util.SecurityFrameworkUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;

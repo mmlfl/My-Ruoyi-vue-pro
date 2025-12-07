@@ -3,12 +3,17 @@ package com.lfl.lfl.framework.security.util;
 import cn.hutool.core.util.StrUtil;
 import com.lfl.lfl.framework.security.LoginUser;
 import org.springframework.lang.Nullable;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.authentication.WebAuthenticationDetails;
+import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.util.StringUtils;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.util.Collections;
 
 public class SecurityFrameworkUtils {
 
@@ -35,6 +40,22 @@ public class SecurityFrameworkUtils {
         }
         int index = token.indexOf(AUTHORIZATION_HEADER+" ");
         return index>=0?token.substring(index+7).trim() : token;
+    }
+    /**
+     * 设置当前用户
+     * @param loginUser
+     */
+    public static void setLoginUser(LoginUser loginUser, HttpServletRequest request){
+        //创建Authentication并设置到上下文中
+        Authentication authentication = buildAuthentication(loginUser, request);
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+    }
+
+    private static Authentication buildAuthentication(LoginUser loginUser, HttpServletRequest request){
+        UsernamePasswordAuthenticationToken authenticationToken =
+                new UsernamePasswordAuthenticationToken(loginUser, null, Collections.emptyList());
+        authenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails( request));
+        return authenticationToken;
     }
 
     /**

@@ -2,6 +2,7 @@ package com.lfl.lfl.framework.security;
 
 import cn.hutool.core.map.MapUtil;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.Builder;
 import lombok.Data;
 
 import java.time.LocalDateTime;
@@ -10,6 +11,7 @@ import java.util.List;
 import java.util.Map;
 
 @Data
+@Builder
 public class LoginUser {
 
     /**
@@ -25,20 +27,20 @@ public class LoginUser {
      * 登录时间
      */
     private LocalDateTime loginTime;
-//    /**
-//     * 用户类型
-//     *
-//     * 关联 {@link UserTypeEnum}
-//     */
-//    private Integer userType;
+    /**
+     * 用户类型
+     *
+     * 关联
+     */
+    private Integer userType;
     /**
      * 额外的用户信息
      */
     private Map<String, String> info;
-//    /**
-//     * 租户编号
-//     */
-//    private Long tenantId;
+    /**
+     * 租户编号
+     */
+    private Long tenantId;
     /**
      * 授权范围
      */
@@ -56,10 +58,10 @@ public class LoginUser {
      */
     @JsonIgnore
     private Map<String, Object> context;
-//    /**
-//     * 访问的租户编号
-//     */
-//    private Long visitTenantId;
+    /**
+     * 访问的租户编号
+     */
+    private Long visitTenantId;
 
     public void setContext(String key, Object value) {
         if (context == null) {

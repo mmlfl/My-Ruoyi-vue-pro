@@ -2,8 +2,8 @@ package com.lfl.yudao.server.pojo.DAO;
 
 
 import cn.hutool.json.JSONUtil;
+import com.lfl.lfl.framework.security.LoginUser;
 import com.lfl.yudao.server.constants.RedisConstants;
-import com.lfl.yudao.server.pojo.LoginUser;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Repository;
 

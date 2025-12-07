@@ -4,11 +4,11 @@ import cn.hutool.core.lang.UUID;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.lfl.lfl.framework.common.exception.enums.ErrorCodeEnum;
+import com.lfl.lfl.framework.security.LoginUser;
 import com.lfl.yudao.server.mapper.UserMapper;
 import com.lfl.yudao.server.pojo.DAO.LoginUserRedisDAO;
 import com.lfl.yudao.server.pojo.DO.User;
 import com.lfl.yudao.server.pojo.DTO.LoginDTO;
-import com.lfl.yudao.server.pojo.LoginUser;
 import com.lfl.yudao.server.pojo.VO.LoginVO;
 import com.lfl.yudao.server.service.UserService;
 import org.springframework.stereotype.Service;
@@ -32,16 +32,16 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     public LoginVO login(LoginDTO loginDTO) {
         User user = authenticate(loginDTO);
         String token = UUID.fastUUID().toString();
-
-        LoginUser loginUser = new LoginUser();
-        loginUser.setId(user.getId());
-        loginUser.setUsername(user.getUsername());
-        loginUser.setScopes(List.of("admin"));
         long instants = System.currentTimeMillis()+30*60*1000;
-        loginUser.setExpiresTime(Instant.ofEpochMilli(instants).atZone(ZoneId.systemDefault()).toLocalDateTime());
-        loginUser.setLoginTime(LocalDateTime.now());
+        LoginUser loginUser = LoginUser.builder()
+                .id(user.getId())
+                .username(user.getUsername())
+                .scopes(List.of("admin"))
+                .expiresTime(LocalDateTime.ofInstant(Instant.ofEpochMilli(instants), ZoneId.systemDefault()))
+                .loginTime(LocalDateTime.now()).build();
+
         loginUserRedisDAO.set(token,loginUser);
-        return new LoginVO(token,user);
+        return new LoginVO(token,loginUser);
     }
 
     private User authenticate(LoginDTO loginDTO) {
