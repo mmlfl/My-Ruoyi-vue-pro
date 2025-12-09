@@ -1,0 +1,23 @@
+server:
+  port: 18080
+
+spring:
+  datasource:
+    username: root
+    password: 18876398486Lll
+    url: jdbc:mysql://127.0.0.1:3306/lfl-ruoyi-vue-pro?useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true&nullCatalogMeansCurrent=true&rewriteBatchedStatements=true
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    password: 18876398486Lll
+    database: 0
+    timeout: 3000
+    # Redisson 配置
+  redisson:
+    address: redis://127.0.0.1:6379
+    # 如果 Redis 设置了密码，取消下面的注释并填写正确的密码
+    # password: your-redis-password
+    database: 0
+debug: true

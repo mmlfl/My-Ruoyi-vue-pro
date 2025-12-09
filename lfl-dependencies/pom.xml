@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.lfl</groupId>
     <artifactId>lfl-dependencies</artifactId>
-    <version>2025.10-jdk8-SNAPSHOT</version>
+    <version>${revision}</version>
     <packaging>pom</packaging>
     <name>lfl-dependencies</name>
     <description>基础 bom 文件，管理整个项目的依赖版本</description>
