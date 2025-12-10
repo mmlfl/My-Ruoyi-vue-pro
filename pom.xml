@@ -13,7 +13,6 @@
         <module>lfl-dependencies</module>
         <module>lfl-framework</module>
         <module>lfl-module-system</module>
-        <module>lfl-server</module>
     </modules>
 
     <name>${project.artifactId}</name>

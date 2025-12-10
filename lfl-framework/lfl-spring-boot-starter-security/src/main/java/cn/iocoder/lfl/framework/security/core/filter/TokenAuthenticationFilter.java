@@ -9,6 +9,7 @@ import cn.iocoder.lfl.framework.security.core.util.SecurityFrameworkUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.filter.OncePerRequestFilter;
 
+import javax.annotation.Resource;
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -19,6 +20,7 @@ import java.io.IOException;
 public class TokenAuthenticationFilter extends OncePerRequestFilter{
 
     private final OAuth2TokenCommonApi oAuth2TokenCommonApi;
+
     private final SecurityProperties securityProperties;
 
     @Override
@@ -30,6 +32,8 @@ public class TokenAuthenticationFilter extends OncePerRequestFilter{
 
             SecurityFrameworkUtils.setLoginUser(loginUser,request);
         }
+
+        filterChain.doFilter(request,response);
     }
 
 

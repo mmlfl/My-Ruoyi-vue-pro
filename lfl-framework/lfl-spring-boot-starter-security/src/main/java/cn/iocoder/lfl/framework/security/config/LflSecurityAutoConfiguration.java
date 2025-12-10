@@ -6,9 +6,9 @@ import cn.iocoder.lfl.framework.security.core.handler.AuthenticationEntryPointIm
 import cn.iocoder.lfl.framework.security.core.filter.TokenAuthenticationFilter;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.AutoConfigureOrder;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.AuthenticationEntryPoint;
@@ -21,6 +21,9 @@ import javax.annotation.Resource;
 @EnableConfigurationProperties(SecurityProperties.class)
 public class LflSecurityAutoConfiguration {
 
+    @Resource
+    @Lazy
+    private OAuth2TokenCommonApi oAuth2TokenCommonApi;
     @Resource
     private SecurityProperties securityProperties;
     /**
@@ -51,10 +54,10 @@ public class LflSecurityAutoConfiguration {
     }
 
     /**
-     * 登录用户过滤器
+     * Token 认证过滤器
      */
     @Bean
-    public TokenAuthenticationFilter tokenAuthenticationFilter(OAuth2TokenCommonApi oAuth2TokenCommonApi){
+    public TokenAuthenticationFilter tokenAuthenticationFilter(){
         return new TokenAuthenticationFilter(oAuth2TokenCommonApi,securityProperties);
     }
 
