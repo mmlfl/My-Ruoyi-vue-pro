@@ -1,0 +1,33 @@
+package cn.iocoder.lfl.module.system.oauth2;
+
+import cn.iocoder.lfl.framework.common.oauth2.DTO.OAuth2AccessTokenCheckRespDTO;
+import cn.iocoder.lfl.framework.common.oauth2.OAuth2TokenCommonApi;
+import cn.iocoder.lfl.framework.security.core.LoginUser;
+import cn.iocoder.lfl.module.system.pojo.DAO.LoginUserRedisDAO;
+import org.springframework.stereotype.Service;
+
+import javax.annotation.PostConstruct;
+import javax.annotation.Resource;
+
+@Service
+public class OAuth2TokenCommonApiImpl implements OAuth2TokenCommonApi {
+    @Resource
+    private LoginUserRedisDAO loginUserRedisDAO;
+
+    @PostConstruct
+    public void init() {
+        System.out.println("OAuth2TokenCommonApiImpl 被初始化了");
+    }
+    @Override
+    public OAuth2AccessTokenCheckRespDTO checkAccessToken(String token) {
+        LoginUser loginUser = loginUserRedisDAO.get(token);
+        return OAuth2AccessTokenCheckRespDTO.builder()
+                .userId(loginUser.getId())
+                .userType(loginUser.getUserType())
+                .userInfo(loginUser.getInfo())
+                .tenantId(loginUser.getTenantId())
+                .scopes(loginUser.getScopes())
+                .expiresTime(loginUser.getExpiresTime())
+                .build();
+    }
+}
