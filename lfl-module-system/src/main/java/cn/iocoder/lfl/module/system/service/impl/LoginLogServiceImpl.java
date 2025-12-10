@@ -4,7 +4,9 @@ import cn.iocoder.lfl.module.system.mapper.LoginLogMapper;
 import cn.iocoder.lfl.module.system.pojo.DO.SysLoginLog;
 import cn.iocoder.lfl.module.system.service.LoginLogService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import org.springframework.stereotype.Service;
 
+@Service
 public class LoginLogServiceImpl extends ServiceImpl<LoginLogMapper, SysLoginLog> implements LoginLogService {
 
     @Override

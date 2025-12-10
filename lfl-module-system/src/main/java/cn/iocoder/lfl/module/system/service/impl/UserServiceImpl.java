@@ -1,6 +1,9 @@
 package cn.iocoder.lfl.module.system.service.impl;
 
 import cn.hutool.core.lang.UUID;
+import cn.iocoder.lfl.framework.common.util.servlet.ServletUtils;
+import cn.iocoder.lfl.module.system.pojo.DO.SysLoginLog;
+import cn.iocoder.lfl.module.system.service.LoginLogService;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import cn.iocoder.lfl.framework.common.exception.enums.ErrorCodeEnum;
@@ -31,10 +34,22 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     private LoginUserRedisDAO loginUserRedisDAO;
     @Resource
     private PasswordEncoder passwordEncoder;
+    @Resource
+    private LoginLogService loginLogService;
 
     @Override
     public LoginVO login(LoginDTO loginDTO) {
         User user = authenticate(loginDTO);
+        loginLogService.createLoginLog(SysLoginLog.builder()
+                .userId(user.getId())
+                .username(user.getUsername())
+                .userIp(ServletUtils.getClientIP())
+                .userAgent(ServletUtils.getUserAgent())
+                .type(1)
+                .result(true)
+                .createTime(LocalDateTime.now())
+                .build()
+        );
         String token = UUID.fastUUID().toString();
         long instants = System.currentTimeMillis()+30*60*1000;
         LoginUser loginUser = LoginUser.builder()

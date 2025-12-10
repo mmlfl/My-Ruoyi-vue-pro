@@ -29,10 +29,10 @@ public class TokenAuthenticationFilter extends OncePerRequestFilter{
                 securityProperties.getHeaderName(),securityProperties.getParameterName());
         if(StrUtil.isNotEmpty(token)){
             LoginUser loginUser = buildLoginUserByToken(token);
-
-            SecurityFrameworkUtils.setLoginUser(loginUser,request);
+            if(loginUser!=null){
+                SecurityFrameworkUtils.setLoginUser(loginUser,request);
+            }
         }
-
         filterChain.doFilter(request,response);
     }
 
