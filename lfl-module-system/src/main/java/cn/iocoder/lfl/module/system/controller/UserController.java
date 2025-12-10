@@ -3,10 +3,7 @@ package cn.iocoder.lfl.module.system.controller;
 import cn.iocoder.lfl.module.system.pojo.DTO.LoginDTO;
 import cn.iocoder.lfl.module.system.pojo.VO.LoginVO;
 import cn.iocoder.lfl.module.system.service.UserService;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import cn.iocoder.lfl.framework.common.pojo.CommonResult;
 
 import javax.annotation.Resource;
@@ -23,8 +20,12 @@ public class UserController {
     private UserService userService;
 
     @PostMapping("/login")
-    @PermitAll
     public CommonResult<LoginVO> login(@RequestBody @Valid LoginDTO loginDTO){
         return success(userService.login(loginDTO));
+    }
+
+    @GetMapping("test")
+    public String test(){
+        return "你成功访问了 Test 类!";
     }
 }

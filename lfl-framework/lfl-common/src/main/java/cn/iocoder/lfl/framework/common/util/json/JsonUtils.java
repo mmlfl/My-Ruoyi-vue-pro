@@ -1,7 +1,9 @@
 package cn.iocoder.lfl.framework.common.util.json;
 
+import cn.hutool.core.util.StrUtil;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
@@ -11,6 +13,7 @@ import lombok.Getter;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -41,5 +44,16 @@ public class JsonUtils {
         return objectMapper.writeValueAsString(obj);
     }
 
+    public static <T> T parseObject(String text,Class<T> clazz){
+        if(StrUtil.isEmpty(text)){
+            return null;
+        }
+        try{
+            return objectMapper.readValue(text, clazz);
+        }catch (IOException e){
+            log.error("[parseObject][解析内容({})时，发生异常]", text, e);
+            throw new RuntimeException(e);
+        }
+    }
 
 }

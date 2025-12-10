@@ -22,9 +22,6 @@ import javax.annotation.Resource;
 public class LflSecurityAutoConfiguration {
 
     @Resource
-    @Lazy
-    private OAuth2TokenCommonApi oAuth2TokenCommonApi;
-    @Resource
     private SecurityProperties securityProperties;
     /**
      * 认证失败处理器
@@ -57,7 +54,7 @@ public class LflSecurityAutoConfiguration {
      * Token 认证过滤器
      */
     @Bean
-    public TokenAuthenticationFilter tokenAuthenticationFilter(){
+    public TokenAuthenticationFilter tokenAuthenticationFilter(OAuth2TokenCommonApi oAuth2TokenCommonApi){
         return new TokenAuthenticationFilter(oAuth2TokenCommonApi,securityProperties);
     }
 

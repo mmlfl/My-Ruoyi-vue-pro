@@ -14,13 +14,12 @@ public class OAuth2TokenCommonApiImpl implements OAuth2TokenCommonApi {
     @Resource
     private LoginUserRedisDAO loginUserRedisDAO;
 
-    @PostConstruct
-    public void init() {
-        System.out.println("OAuth2TokenCommonApiImpl 被初始化了");
-    }
     @Override
     public OAuth2AccessTokenCheckRespDTO checkAccessToken(String token) {
         LoginUser loginUser = loginUserRedisDAO.get(token);
+        if(loginUser ==null){
+            return null;
+        }
         return OAuth2AccessTokenCheckRespDTO.builder()
                 .userId(loginUser.getId())
                 .userType(loginUser.getUserType())

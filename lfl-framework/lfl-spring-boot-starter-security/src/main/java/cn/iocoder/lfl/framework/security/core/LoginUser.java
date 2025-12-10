@@ -2,8 +2,10 @@ package cn.iocoder.lfl.framework.security.core;
 
 import cn.hutool.core.map.MapUtil;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 import java.util.HashMap;
@@ -11,6 +13,8 @@ import java.util.List;
 import java.util.Map;
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Builder
 public class LoginUser {
 
