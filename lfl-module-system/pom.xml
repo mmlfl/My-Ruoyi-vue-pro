@@ -24,14 +24,10 @@
             <groupId>com.lfl</groupId>
             <artifactId>lfl-spring-boot-starter-security</artifactId>
         </dependency>
-        <dependency>
-            <groupId>com.baomidou</groupId>
-            <artifactId>mybatis-plus-boot-starter</artifactId>
-        </dependency>
 
         <dependency>
-            <groupId>com.mysql</groupId>
-            <artifactId>mysql-connector-j</artifactId>
+            <groupId>com.lfl</groupId>
+            <artifactId>lfl-spring-boot-starter-mybatis</artifactId>
         </dependency>
 
         <dependency>

@@ -15,7 +15,6 @@ import cn.iocoder.lfl.module.system.pojo.DTO.LoginDTO;
 import cn.iocoder.lfl.module.system.pojo.VO.LoginVO;
 import cn.iocoder.lfl.module.system.service.UserService;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
