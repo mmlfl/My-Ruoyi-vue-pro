@@ -1,5 +1,6 @@
 package cn.iocoder.lfl.module.system.pojo.DO;
 
+import cn.iocoder.lfl.framework.mybatis.core.dataobject.BaseDO;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
@@ -8,17 +9,45 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@TableName("sys_user")
+import java.util.Set;
+
+@TableName("system_users")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class User {
+public class User extends BaseDO {
     @TableId(value = "id",type = IdType.AUTO)
     private Long id;
-    @TableField(value="username")
+
     private String username;
-    @TableField(value="password")
+
     private String password;
-    @TableField(value="status")
+
+    private String nickname;
+
+    private String remark;
+
+    private Long deptId;
+
+    private Set<Long> postIds;
+
+    private String email;
+
+    private String mobile;
+
+    private Integer sex;
+
+    private String avatar;
+
     private Integer status;
+    /**
+     * 最后登录IP
+     */
+    private String loginIp;
+    /**
+     * 最后登录时间
+     */
+    private String loginDate;
+
+
 }
