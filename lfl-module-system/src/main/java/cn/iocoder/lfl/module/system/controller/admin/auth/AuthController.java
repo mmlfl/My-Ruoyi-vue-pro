@@ -2,7 +2,7 @@ package cn.iocoder.lfl.module.system.controller.admin.auth;
 
 import cn.iocoder.lfl.module.system.controller.admin.auth.vo.AuthLoginReqVO;
 import cn.iocoder.lfl.module.system.controller.admin.auth.vo.AuthLoginRespVO;
-import cn.iocoder.lfl.module.system.service.UserService;
+import cn.iocoder.lfl.module.system.service.auth.AdminAuthService;
 import org.springframework.web.bind.annotation.*;
 import cn.iocoder.lfl.framework.common.pojo.CommonResult;
 
@@ -16,11 +16,11 @@ import static cn.iocoder.lfl.framework.common.pojo.CommonResult.success;
 public class AuthController {
 
     @Resource
-    private UserService userService;
+    private AdminAuthService adminAuthService;
 
     @PostMapping("/login")
     public CommonResult<AuthLoginRespVO> login(@RequestBody @Valid AuthLoginReqVO reqVO){
-        return success(userService.login(reqVO));
+        return success(adminAuthService.login(reqVO));
     }
 
     @GetMapping("test")

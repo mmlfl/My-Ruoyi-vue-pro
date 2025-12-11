@@ -1,11 +1,11 @@
-package cn.iocoder.lfl.module.system.service.impl;
+package cn.iocoder.lfl.module.system.service.auth;
 
 import cn.hutool.core.lang.UUID;
 import cn.iocoder.lfl.framework.common.util.servlet.ServletUtils;
 import cn.iocoder.lfl.module.system.controller.admin.auth.vo.AuthLoginReqVO;
 import cn.iocoder.lfl.module.system.controller.admin.auth.vo.AuthLoginRespVO;
 import cn.iocoder.lfl.module.system.dal.dataobject.logger.LoginLogDO;
-import cn.iocoder.lfl.module.system.service.LoginLogService;
+import cn.iocoder.lfl.module.system.service.logger.LoginLogService;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import cn.iocoder.lfl.framework.common.exception.enums.ErrorCodeEnum;
@@ -13,7 +13,6 @@ import cn.iocoder.lfl.framework.security.core.LoginUser;
 import cn.iocoder.lfl.module.system.dal.mysql.user.AdminUserMapper;
 import cn.iocoder.lfl.module.system.dal.redis.oauth2.LoginUserRedisDAO;
 import cn.iocoder.lfl.module.system.dal.dataobject.user.AdminUserDo;
-import cn.iocoder.lfl.module.system.service.UserService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -27,7 +26,7 @@ import static cn.iocoder.lfl.module.system.exception.util.ServiceExceptionUtil.e
 
 
 @Service
-public class UserServiceImpl extends ServiceImpl<AdminUserMapper, AdminUserDo> implements UserService {
+public class AdminAuthServiceImpl extends ServiceImpl<AdminUserMapper, AdminUserDo> implements AdminAuthService {
 
     @Resource
     private LoginUserRedisDAO loginUserRedisDAO;

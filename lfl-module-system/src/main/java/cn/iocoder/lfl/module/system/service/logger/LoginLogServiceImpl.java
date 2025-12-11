@@ -1,8 +1,7 @@
-package cn.iocoder.lfl.module.system.service.impl;
+package cn.iocoder.lfl.module.system.service.logger;
 
 import cn.iocoder.lfl.module.system.dal.mysql.logger.LoginLogMapper;
 import cn.iocoder.lfl.module.system.dal.dataobject.logger.LoginLogDO;
-import cn.iocoder.lfl.module.system.service.LoginLogService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 

@@ -1,4 +1,4 @@
-package cn.iocoder.lfl.module.system.service;
+package cn.iocoder.lfl.module.system.service.logger;
 
 import cn.iocoder.lfl.module.system.dal.dataobject.logger.LoginLogDO;
 import com.baomidou.mybatisplus.extension.service.IService;
