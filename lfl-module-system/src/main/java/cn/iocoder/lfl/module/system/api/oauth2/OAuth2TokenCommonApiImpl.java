@@ -1,12 +1,11 @@
-package cn.iocoder.lfl.module.system.oauth2;
+package cn.iocoder.lfl.module.system.api.oauth2;
 
 import cn.iocoder.lfl.framework.common.oauth2.DTO.OAuth2AccessTokenCheckRespDTO;
 import cn.iocoder.lfl.framework.common.oauth2.OAuth2TokenCommonApi;
 import cn.iocoder.lfl.framework.security.core.LoginUser;
-import cn.iocoder.lfl.module.system.pojo.DAO.LoginUserRedisDAO;
+import cn.iocoder.lfl.module.system.dal.redis.oauth2.LoginUserRedisDAO;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 
 @Service

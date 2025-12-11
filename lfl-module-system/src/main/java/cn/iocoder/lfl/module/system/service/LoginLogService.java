@@ -1,8 +1,8 @@
 package cn.iocoder.lfl.module.system.service;
 
-import cn.iocoder.lfl.module.system.pojo.DO.SysLoginLog;
+import cn.iocoder.lfl.module.system.dal.dataobject.logger.LoginLogDO;
 import com.baomidou.mybatisplus.extension.service.IService;
 
-public interface LoginLogService extends IService<SysLoginLog> {
-    public void createLoginLog(SysLoginLog sysLoginLog);
+public interface LoginLogService extends IService<LoginLogDO> {
+    public void createLoginLog(LoginLogDO loginLogDO);
 }

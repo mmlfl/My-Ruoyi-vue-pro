@@ -1,4 +1,4 @@
-package cn.iocoder.lfl.module.system.pojo.DO;
+package cn.iocoder.lfl.module.system.dal.dataobject.logger;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 @TableName("system_login_log")
 @Data
 @Builder
-public class SysLoginLog {
+public class LoginLogDO {
     @TableId(type = IdType.AUTO)
     private Long id;
     @TableField("user_id")

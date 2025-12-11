@@ -1,10 +1,10 @@
 package cn.iocoder.lfl.module.system.service;
 
+import cn.iocoder.lfl.module.system.controller.admin.auth.vo.AuthLoginReqVO;
+import cn.iocoder.lfl.module.system.controller.admin.auth.vo.AuthLoginRespVO;
 import com.baomidou.mybatisplus.extension.service.IService;
-import cn.iocoder.lfl.module.system.pojo.DO.User;
-import cn.iocoder.lfl.module.system.pojo.DTO.LoginDTO;
-import cn.iocoder.lfl.module.system.pojo.VO.LoginVO;
+import cn.iocoder.lfl.module.system.dal.dataobject.user.AdminUserDo;
 
-public interface UserService extends IService<User> {
-    LoginVO login(LoginDTO loginDTO);
+public interface UserService extends IService<AdminUserDo> {
+    AuthLoginRespVO login(AuthLoginReqVO reqVO);
 }

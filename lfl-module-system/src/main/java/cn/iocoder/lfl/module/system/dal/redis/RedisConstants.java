@@ -1,4 +1,4 @@
-package cn.iocoder.lfl.module.system.constants;
+package cn.iocoder.lfl.module.system.dal.redis;
 
 public interface RedisConstants {
 

@@ -2,17 +2,17 @@ package cn.iocoder.lfl.module.system.service.impl;
 
 import cn.hutool.core.lang.UUID;
 import cn.iocoder.lfl.framework.common.util.servlet.ServletUtils;
-import cn.iocoder.lfl.module.system.pojo.DO.SysLoginLog;
+import cn.iocoder.lfl.module.system.controller.admin.auth.vo.AuthLoginReqVO;
+import cn.iocoder.lfl.module.system.controller.admin.auth.vo.AuthLoginRespVO;
+import cn.iocoder.lfl.module.system.dal.dataobject.logger.LoginLogDO;
 import cn.iocoder.lfl.module.system.service.LoginLogService;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import cn.iocoder.lfl.framework.common.exception.enums.ErrorCodeEnum;
 import cn.iocoder.lfl.framework.security.core.LoginUser;
-import cn.iocoder.lfl.module.system.mapper.UserMapper;
-import cn.iocoder.lfl.module.system.pojo.DAO.LoginUserRedisDAO;
-import cn.iocoder.lfl.module.system.pojo.DO.User;
-import cn.iocoder.lfl.module.system.pojo.DTO.LoginDTO;
-import cn.iocoder.lfl.module.system.pojo.VO.LoginVO;
+import cn.iocoder.lfl.module.system.dal.mysql.user.AdminUserMapper;
+import cn.iocoder.lfl.module.system.dal.redis.oauth2.LoginUserRedisDAO;
+import cn.iocoder.lfl.module.system.dal.dataobject.user.AdminUserDo;
 import cn.iocoder.lfl.module.system.service.UserService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -27,7 +27,7 @@ import static cn.iocoder.lfl.module.system.exception.util.ServiceExceptionUtil.e
 
 
 @Service
-public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements UserService {
+public class UserServiceImpl extends ServiceImpl<AdminUserMapper, AdminUserDo> implements UserService {
 
     @Resource
     private LoginUserRedisDAO loginUserRedisDAO;
@@ -37,11 +37,11 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     private LoginLogService loginLogService;
 
     @Override
-    public LoginVO login(LoginDTO loginDTO) {
-        User user = authenticate(loginDTO);
-        loginLogService.createLoginLog(SysLoginLog.builder()
-                .userId(user.getId())
-                .username(user.getUsername())
+    public AuthLoginRespVO login(AuthLoginReqVO reqVO) {
+        AdminUserDo adminUserDo = authenticate(reqVO);
+        loginLogService.createLoginLog(LoginLogDO.builder()
+                .userId(adminUserDo.getId())
+                .username(adminUserDo.getUsername())
                 .userIp(ServletUtils.getClientIP())
                 .userAgent(ServletUtils.getUserAgent())
                 .type(1)
@@ -52,23 +52,23 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         String token = UUID.fastUUID().toString();
         long instants = System.currentTimeMillis()+30*60*1000;
         LoginUser loginUser = LoginUser.builder()
-                .id(user.getId())
-                .username(user.getUsername())
+                .id(adminUserDo.getId())
+                .username(adminUserDo.getUsername())
                 .scopes(List.of("admin"))
                 .expiresTime(LocalDateTime.ofInstant(Instant.ofEpochMilli(instants), ZoneId.systemDefault()))
                 .loginTime(LocalDateTime.now()).build();
 
         loginUserRedisDAO.set(token,loginUser);
-        return new LoginVO(token,loginUser);
+        return new AuthLoginRespVO(token,loginUser);
     }
 
-    private User authenticate(LoginDTO loginDTO) {
-        QueryWrapper<User> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("username", loginDTO.getUsername());
-        User bean = this.getOne(queryWrapper);
+    private AdminUserDo authenticate(AuthLoginReqVO reqVO) {
+        QueryWrapper<AdminUserDo> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("username", reqVO.getUsername());
+        AdminUserDo bean = this.getOne(queryWrapper);
         if(bean==null){
             throw exception(ErrorCodeEnum.USER_NOT_EXIST);
-        }else if(!passwordEncoder.matches(loginDTO.getPassword(),bean.getPassword())){
+        }else if(!passwordEncoder.matches(reqVO.getPassword(),bean.getPassword())){
             throw exception(ErrorCodeEnum.USERNAME_PASSWORD_ERROR);
         }
         return bean;

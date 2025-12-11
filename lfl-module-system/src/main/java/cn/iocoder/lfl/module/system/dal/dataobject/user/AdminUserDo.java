@@ -1,8 +1,7 @@
-package cn.iocoder.lfl.module.system.pojo.DO;
+package cn.iocoder.lfl.module.system.dal.dataobject.user;
 
 import cn.iocoder.lfl.framework.mybatis.core.dataobject.BaseDO;
 import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.AllArgsConstructor;
@@ -15,7 +14,7 @@ import java.util.Set;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class User extends BaseDO {
+public class AdminUserDo extends BaseDO {
     @TableId(value = "id",type = IdType.AUTO)
     private Long id;
 

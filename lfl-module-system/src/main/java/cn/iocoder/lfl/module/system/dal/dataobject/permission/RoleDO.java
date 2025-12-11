@@ -1,4 +1,4 @@
-package cn.iocoder.lfl.module.system.pojo.DO.permission;
+package cn.iocoder.lfl.module.system.dal.dataobject.permission;
 
 import cn.iocoder.lfl.framework.mybatis.core.dataobject.BaseDO;
 import com.baomidou.mybatisplus.annotation.IdType;
@@ -10,7 +10,7 @@ import java.util.Set;
 
 @TableName("system_role")
 @Data
-public class Role extends BaseDO {
+public class RoleDO extends BaseDO {
     @TableId(type = IdType.AUTO)
     private Long id;
 

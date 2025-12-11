@@ -1,10 +1,9 @@
-package cn.iocoder.lfl.module.system.pojo.DAO;
+package cn.iocoder.lfl.module.system.dal.redis.oauth2;
 
 
-import cn.hutool.json.JSONUtil;
 import cn.iocoder.lfl.framework.common.util.json.JsonUtils;
 import cn.iocoder.lfl.framework.security.core.LoginUser;
-import cn.iocoder.lfl.module.system.constants.RedisConstants;
+import cn.iocoder.lfl.module.system.dal.redis.RedisConstants;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Repository;
 
