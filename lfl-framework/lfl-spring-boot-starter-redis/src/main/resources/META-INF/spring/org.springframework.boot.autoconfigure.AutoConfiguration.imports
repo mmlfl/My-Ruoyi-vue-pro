@@ -1,1 +1,2 @@
 cn.iocoder.lfl.framework.redis.config.LflRedisAutoConfiguration
+cn.iocoder.lfl.framework.redis.config.LflCacheAutoConfiguration
