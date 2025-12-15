@@ -1,4 +1,4 @@
-package cn.iocoder.lfl.framework.common.oauth2.DTO;
+package cn.iocoder.lfl.framework.common.biz.system.oauth2.DTO;
 
 import lombok.Builder;
 import lombok.Data;

@@ -1,15 +1,14 @@
 package cn.iocoder.lfl.framework.security.core.filter;
 
 import cn.hutool.core.util.StrUtil;
-import cn.iocoder.lfl.framework.common.oauth2.DTO.OAuth2AccessTokenCheckRespDTO;
-import cn.iocoder.lfl.framework.common.oauth2.OAuth2TokenCommonApi;
+import cn.iocoder.lfl.framework.common.biz.system.oauth2.DTO.OAuth2AccessTokenCheckRespDTO;
+import cn.iocoder.lfl.framework.common.biz.system.oauth2.OAuth2TokenCommonApi;
 import cn.iocoder.lfl.framework.security.core.LoginUser;
 import cn.iocoder.lfl.framework.security.config.SecurityProperties;
 import cn.iocoder.lfl.framework.security.core.util.SecurityFrameworkUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-import javax.annotation.Resource;
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;

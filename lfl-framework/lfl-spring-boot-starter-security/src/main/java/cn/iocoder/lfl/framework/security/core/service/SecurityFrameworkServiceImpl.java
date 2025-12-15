@@ -1,11 +1,15 @@
 package cn.iocoder.lfl.framework.security.core.service;
 
+import cn.iocoder.lfl.framework.common.biz.system.permission.PermissionCommonApi;
 import cn.iocoder.lfl.framework.security.core.util.SecurityFrameworkUtils;
 
-import java.util.Objects;
+import javax.annotation.Resource;
+
 
 public class SecurityFrameworkServiceImpl implements SecurityFrameworkService{
 
+    @Resource
+    private PermissionCommonApi permissionApi;
     @Override
     public boolean hasPermission(String permission) {
         return hasAnyPermissions( permission);
@@ -18,6 +22,6 @@ public class SecurityFrameworkServiceImpl implements SecurityFrameworkService{
         if(loginUserId == null){
             return false;
         }
-        return false;
+        return permissionApi.hasAnyPermissions(loginUserId, permissions);
     }
 }

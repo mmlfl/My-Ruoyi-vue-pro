@@ -22,7 +22,7 @@
         <dependency>
             <groupId>com.lfl</groupId>
             <artifactId>lfl-spring-boot-starter-security</artifactId>
-            <scope>provided</scope>
+            <scope>provided</scope> <!-- 只有DefaultDBFiledHandler使用 -->
         </dependency>
 
         <!-- DB相关 -->
@@ -35,6 +35,12 @@
             <groupId>com.mysql</groupId>
             <artifactId>mysql-connector-j</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>com.github.yulichang</groupId>
+            <artifactId>mybatis-plus-join-boot-starter</artifactId>
+        </dependency>
     </dependencies>
+
 
 </project>

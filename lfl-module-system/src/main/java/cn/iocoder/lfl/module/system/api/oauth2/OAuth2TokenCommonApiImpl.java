@@ -1,7 +1,7 @@
 package cn.iocoder.lfl.module.system.api.oauth2;
 
-import cn.iocoder.lfl.framework.common.oauth2.DTO.OAuth2AccessTokenCheckRespDTO;
-import cn.iocoder.lfl.framework.common.oauth2.OAuth2TokenCommonApi;
+import cn.iocoder.lfl.framework.common.biz.system.oauth2.DTO.OAuth2AccessTokenCheckRespDTO;
+import cn.iocoder.lfl.framework.common.biz.system.oauth2.OAuth2TokenCommonApi;
 import cn.iocoder.lfl.framework.security.core.LoginUser;
 import cn.iocoder.lfl.module.system.dal.redis.oauth2.LoginUserRedisDAO;
 import org.springframework.stereotype.Service;

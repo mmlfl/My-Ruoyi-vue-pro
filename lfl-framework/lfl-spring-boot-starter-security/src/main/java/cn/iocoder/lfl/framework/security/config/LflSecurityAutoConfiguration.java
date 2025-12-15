@@ -1,6 +1,6 @@
 package cn.iocoder.lfl.framework.security.config;
 
-import cn.iocoder.lfl.framework.common.oauth2.OAuth2TokenCommonApi;
+import cn.iocoder.lfl.framework.common.biz.system.oauth2.OAuth2TokenCommonApi;
 import cn.iocoder.lfl.framework.security.core.handler.AccessDeniedHandlerImpl;
 import cn.iocoder.lfl.framework.security.core.handler.AuthenticationEntryPointImpl;
 import cn.iocoder.lfl.framework.security.core.filter.TokenAuthenticationFilter;
@@ -8,7 +8,6 @@ import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.AutoConfigureOrder;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.AuthenticationEntryPoint;

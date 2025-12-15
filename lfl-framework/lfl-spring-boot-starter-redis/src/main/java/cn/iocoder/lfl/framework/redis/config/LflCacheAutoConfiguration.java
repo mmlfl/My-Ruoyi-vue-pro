@@ -1,19 +1,29 @@
 package cn.iocoder.lfl.framework.redis.config;
 
 import cn.hutool.core.util.StrUtil;
+import cn.iocoder.lfl.framework.redis.core.TimeOutRedisCacheManager;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.cache.CacheProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Primary;
+import org.springframework.data.redis.cache.BatchStrategies;
 import org.springframework.data.redis.cache.RedisCacheConfiguration;
+import org.springframework.data.redis.cache.RedisCacheManager;
+import org.springframework.data.redis.cache.RedisCacheWriter;
+import org.springframework.data.redis.connection.RedisConnectionFactory;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.RedisSerializationContext;
 import org.springframework.util.StringUtils;
+
+import java.util.Objects;
 
 import static cn.iocoder.lfl.framework.redis.config.LflRedisAutoConfiguration.buildRedisSerializer;
 
 @AutoConfiguration
 @EnableConfigurationProperties({LflCacheProperties.class, CacheProperties.class})
+@EnableCaching
 public class LflCacheAutoConfiguration {
 
     @Bean
@@ -46,5 +56,16 @@ public class LflCacheAutoConfiguration {
             config = config.disableKeyPrefix();
         }
         return config;
+    }
+
+    @Bean
+    public RedisCacheManager redisCacheManager(RedisCacheConfiguration redisCacheConfiguration,
+                                               RedisTemplate<String,Object> redisTemplate,
+                                               LflCacheProperties lflCacheProperties){
+        RedisConnectionFactory connectionFactory = Objects.requireNonNull(redisTemplate.getConnectionFactory());
+        RedisCacheWriter redisCacheWriter = RedisCacheWriter.nonLockingRedisCacheWriter(connectionFactory,
+                BatchStrategies.scan(lflCacheProperties.getRedisScanBatchSize()));
+
+        return new TimeOutRedisCacheManager(redisCacheWriter, redisCacheConfiguration);
     }
 }
