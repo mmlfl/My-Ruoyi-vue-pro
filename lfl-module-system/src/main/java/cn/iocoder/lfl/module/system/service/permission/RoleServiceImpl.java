@@ -9,12 +9,14 @@ import cn.iocoder.lfl.module.system.dal.redis.RedisConstants;
 import cn.iocoder.lfl.module.system.enums.permission.RoleCodeEnum;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
+@Service
 public class RoleServiceImpl extends ServiceImpl<RoleMapper,RoleDO> implements RoleService{
 
     @Resource

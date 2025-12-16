@@ -6,10 +6,12 @@ import cn.iocoder.lfl.module.system.dal.dataobject.permission.MenuDO;
 import cn.iocoder.lfl.module.system.dal.mysql.permission.MenuMapper;
 import cn.iocoder.lfl.module.system.dal.redis.RedisConstants;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.List;
 
+@Service
 public class MenuServiceImpl implements MenuService{
     @Resource
     private MenuMapper menuMapper;

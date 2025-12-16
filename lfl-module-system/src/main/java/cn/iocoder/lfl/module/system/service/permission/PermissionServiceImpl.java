@@ -12,6 +12,7 @@ import cn.iocoder.lfl.module.system.dal.mysql.permission.RoleMenuMapper;
 import cn.iocoder.lfl.module.system.dal.mysql.permission.UserRoleMapper;
 import cn.iocoder.lfl.module.system.dal.redis.RedisConstants;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.Collection;
@@ -20,6 +21,8 @@ import java.util.Set;
 
 import static cn.iocoder.lfl.framework.common.util.collection.CollectionUtils.converSet;
 import static cn.iocoder.lfl.framework.common.util.collection.CollectionUtils.convertList;
+
+@Service
 public class PermissionServiceImpl implements PermissionService{
 
     @Resource

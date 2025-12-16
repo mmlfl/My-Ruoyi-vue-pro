@@ -1,9 +1,12 @@
 package cn.iocoder.lfl.framework.security.config;
 
 import cn.iocoder.lfl.framework.common.biz.system.oauth2.OAuth2TokenCommonApi;
+import cn.iocoder.lfl.framework.common.biz.system.permission.PermissionCommonApi;
 import cn.iocoder.lfl.framework.security.core.handler.AccessDeniedHandlerImpl;
 import cn.iocoder.lfl.framework.security.core.handler.AuthenticationEntryPointImpl;
 import cn.iocoder.lfl.framework.security.core.filter.TokenAuthenticationFilter;
+import cn.iocoder.lfl.framework.security.core.service.SecurityFrameworkService;
+import cn.iocoder.lfl.framework.security.core.service.SecurityFrameworkServiceImpl;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.AutoConfigureOrder;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -55,6 +58,14 @@ public class LflSecurityAutoConfiguration {
     @Bean
     public TokenAuthenticationFilter tokenAuthenticationFilter(OAuth2TokenCommonApi oAuth2TokenCommonApi){
         return new TokenAuthenticationFilter(oAuth2TokenCommonApi,securityProperties);
+    }
+
+    /**
+     * 权限校验器
+     */
+    @Bean("ss")
+    public SecurityFrameworkService securityFrameworkService(PermissionCommonApi permissionCommonApi){
+        return new SecurityFrameworkServiceImpl(permissionCommonApi);
     }
 
 }

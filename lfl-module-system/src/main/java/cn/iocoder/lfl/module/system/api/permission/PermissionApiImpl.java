@@ -1,11 +1,13 @@
 package cn.iocoder.lfl.module.system.api.permission;
 
 import cn.iocoder.lfl.module.system.service.permission.PermissionService;
+import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.Collection;
 import java.util.Set;
 
+@Service
 public class PermissionApiImpl implements PermmsionApi{
 
     @Resource

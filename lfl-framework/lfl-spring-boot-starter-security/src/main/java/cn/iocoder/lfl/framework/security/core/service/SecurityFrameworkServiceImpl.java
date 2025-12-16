@@ -2,14 +2,14 @@ package cn.iocoder.lfl.framework.security.core.service;
 
 import cn.iocoder.lfl.framework.common.biz.system.permission.PermissionCommonApi;
 import cn.iocoder.lfl.framework.security.core.util.SecurityFrameworkUtils;
+import lombok.RequiredArgsConstructor;
 
 import javax.annotation.Resource;
 
-
+@RequiredArgsConstructor
 public class SecurityFrameworkServiceImpl implements SecurityFrameworkService{
 
-    @Resource
-    private PermissionCommonApi permissionApi;
+    private final PermissionCommonApi permissionApi;
     @Override
     public boolean hasPermission(String permission) {
         return hasAnyPermissions( permission);
