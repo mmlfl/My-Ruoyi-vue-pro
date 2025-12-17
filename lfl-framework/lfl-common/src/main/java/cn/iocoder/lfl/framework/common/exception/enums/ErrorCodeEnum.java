@@ -7,7 +7,7 @@ import lombok.Getter;
 public enum ErrorCodeEnum {
     SUCCESS(200,"成功"),
     BADREQUEST(400,"请求参数错误"),
-    UNAUTHORIZED(401,"未授权"),
+    UNAUTHORIZED(401,"用户未授权"),
     FORBIDDEN(403,"没有该操作权限"),
     USERNAME_PASSWORD_ERROR(1001,"用户名或密码错误"),
     USER_NOT_EXIST(1002,"用户不存在"),

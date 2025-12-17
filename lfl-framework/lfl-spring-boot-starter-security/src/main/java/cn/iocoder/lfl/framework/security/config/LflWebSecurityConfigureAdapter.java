@@ -73,8 +73,11 @@ public class LflWebSecurityConfigureAdapter {
         //设置每个请求的权限
         http
                 .authorizeHttpRequests(auth->auth
+                        // Knife4j 接口文档放行
+                        .requestMatchers("/doc.html", "/webjars/**", "/v3/api-docs/**", "/swagger-ui/**", "/swagger-resources/**").permitAll()
                         .requestMatchers(HttpMethod.GET,"/*.html","/*.css","/*.js").permitAll()
-                        .requestMatchers(HttpMethod.POST,"/user/login").permitAll()
+                        .requestMatchers(HttpMethod.POST,"system/auth/login").permitAll()
+                        .requestMatchers((HttpMethod.GET),"/actuator/*").permitAll()
                         .anyRequest().authenticated()
                 );
 

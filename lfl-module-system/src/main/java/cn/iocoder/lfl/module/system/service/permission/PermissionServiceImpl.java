@@ -11,11 +11,13 @@ import cn.iocoder.lfl.module.system.dal.dataobject.permission.UserRoleDO;
 import cn.iocoder.lfl.module.system.dal.mysql.permission.RoleMenuMapper;
 import cn.iocoder.lfl.module.system.dal.mysql.permission.UserRoleMapper;
 import cn.iocoder.lfl.module.system.dal.redis.RedisConstants;
+import org.redisson.api.redisnode.SetSlotCommand;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -72,30 +74,53 @@ public class PermissionServiceImpl implements PermissionService{
         return false;
     }
 
+    @Override
+    public boolean hasAnyRoles(Long userId, String... roles) {
+        //如果角色为空 直接返回 true
+        if(ArrayUtil.isEmpty(roles)){
+            return true;
+        }
+        List<RoleDO> roleDOS = getEnableUserRoleListByUserIdFromCache(userId);
+        if(CollUtil.isEmpty(roleDOS)){
+            return false;
+        }
+        Set<String> codes = converSet(roleDOS, RoleDO::getCode);
+        // 1.是否有角色
+        if(CollUtil.containsAny(codes,CollUtil.newHashSet( roles))){
+            return true;
+        }
+        // 2.是否是超级管理员
+        return roleService.hasAnySuperAdmin(converSet(roleDOS,RoleDO::getId));
+    }
+
+    // ========== 角色-菜单的相关方法  ========== 以下
+
     @Cacheable(value = RedisConstants.MENU_ROLE_ID_LIST,key = "#menuId")
     public List<Long> getMenuRoleIdListByMenuIdFromCache(Long menuId) {
         return convertList(roleMenuMapper.selectListByMenuId(menuId), RoleMenuDO::getRoleId);
     }
 
+
     public List<RoleDO> getEnableUserRoleListByUserIdFromCache(Long userId) {
         Set<Long> roleIds = getSelf().getUserRoleIdListByUserIdFromCache(userId);
         List<RoleDO> roleDOS = roleService.getRoleListFromCache(roleIds);
+        if(roleDOS==null){
+            return null;
+        }
         roleDOS.removeIf(roleDO -> CommonStatusEnum.isDisable(roleDO.getStatus()));
         return roleDOS;
     }
 
-    @Cacheable(value = RedisConstants.USER_ROLE_ID_LIST,key = "#userId")
+    @Override
+    @Cacheable(value = RedisConstants.USER_ROLE_ID_LIST,key = "#userId"
+            ,unless = "#result = null ")
     public Set<Long> getUserRoleIdListByUserIdFromCache(Long userId) {
         return getUserRoleIdListByUserId(userId);
     }
 
+    @Override
     public Set<Long> getUserRoleIdListByUserId(Long userId) {
         return CollectionUtils.converSet(userRoleMapper.selectListByUserId(userId), UserRoleDO::getRoleId);
-    }
-
-    @Override
-    public boolean hasAnyRoles(Long userId, String... roles) {
-        return false;
     }
 
     @Override
@@ -104,6 +129,10 @@ public class PermissionServiceImpl implements PermissionService{
     }
 
 
+    /**
+     * 获取自身Bean对象,用于时springAop发挥作用
+     * @return
+     */
     private PermissionServiceImpl getSelf(){
         return SpringUtil.getBean(getClass());
     }

@@ -19,6 +19,11 @@
             <version>${revision}</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+
         <!--该模块依赖已经包含了web相关依赖了-->
         <dependency>
             <groupId>com.lfl</groupId>

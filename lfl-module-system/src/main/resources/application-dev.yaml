@@ -27,3 +27,9 @@ spring:
 lfl:
   info:
     base-package: cn.iocoder.lfl
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: beans,env,mappings,health

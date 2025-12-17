@@ -1,6 +1,8 @@
 package cn.iocoder.lfl.framework.redis.config;
 
 import cn.hutool.core.util.ReflectUtil;
+import cn.iocoder.lfl.framework.common.util.json.JsonUtils;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import org.redisson.spring.starter.RedissonAutoConfiguration;
@@ -8,6 +10,7 @@ import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.serializer.GenericJackson2JsonRedisSerializer;
 import org.springframework.data.redis.serializer.RedisSerializer;
 
 /**
@@ -35,11 +38,14 @@ public class LflRedisAutoConfiguration {
     }
 
     public static RedisSerializer<?> buildRedisSerializer() {
-        RedisSerializer<Object> json = RedisSerializer.json();
-        // 解决 LocalDateTime 的序列化
-        ObjectMapper objectMapper = (ObjectMapper) ReflectUtil.getFieldValue(json, "mapper");
-        objectMapper.registerModules(new JavaTimeModule());
-        return json;
+        ObjectMapper objectMapper = JsonUtils.getObjectMapper();
+        // 使得存进redis中 可以带上@class 反序列化不报错
+        objectMapper.activateDefaultTyping(
+                objectMapper.getPolymorphicTypeValidator(),
+                ObjectMapper.DefaultTyping.NON_FINAL,
+                JsonTypeInfo.As.PROPERTY
+        );
+        return new GenericJackson2JsonRedisSerializer(objectMapper);
     }
 
 

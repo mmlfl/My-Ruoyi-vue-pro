@@ -25,6 +25,6 @@ public class PermissionApiImpl implements PermmsionApi{
 
     @Override
     public boolean hasAnyRoles(Long userId, String... roles) {
-        return false;
+        return permissionService.hasAnyRoles(userId, roles);
     }
 }
