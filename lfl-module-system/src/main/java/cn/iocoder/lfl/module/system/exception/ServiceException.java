@@ -1,5 +1,6 @@
 package cn.iocoder.lfl.module.system.exception;
 
+import cn.iocoder.lfl.framework.common.exception.ErrorCode;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -13,4 +14,8 @@ public final class ServiceException extends RuntimeException{
     private Integer code;
     private String message;
 
+    public ServiceException(ErrorCode errorCodeEnum){
+        this.code = errorCodeEnum.getCode();
+        this.message = errorCodeEnum.getMessage();
+    }
 }

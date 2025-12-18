@@ -2,6 +2,7 @@ package cn.iocoder.lfl.module.system.exception;
 
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.StrUtil;
+import cn.iocoder.lfl.framework.common.exception.enums.GlobalErrorCodeEnums;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -11,7 +12,6 @@ import cn.iocoder.lfl.framework.common.pojo.CommonResult;
 
 import java.util.List;
 
-import static cn.iocoder.lfl.framework.common.exception.enums.ErrorCodeEnum.BADREQUEST;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {
@@ -35,8 +35,8 @@ public class GlobalExceptionHandler {
             errorMessage = fieldError.getDefaultMessage();
         }
         if(StrUtil.isEmpty(errorMessage)){
-            return CommonResult.error(BADREQUEST);
+            return CommonResult.error(GlobalErrorCodeEnums.BAD_REQUEST);
         }
-        return CommonResult.error(BADREQUEST.getCode(),errorMessage);
+        return CommonResult.error(GlobalErrorCodeEnums.BAD_REQUEST.getCode(),errorMessage);
     }
 }

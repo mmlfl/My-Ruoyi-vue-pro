@@ -1,6 +1,6 @@
 package cn.iocoder.lfl.framework.common.pojo;
 
-import cn.iocoder.lfl.framework.common.exception.enums.ErrorCodeEnum;
+import cn.iocoder.lfl.framework.common.exception.ErrorCode;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -22,7 +22,7 @@ public class CommonResult<T> implements Serializable {
         return result;
     }
 
-    public static <T> CommonResult<T> error(ErrorCodeEnum errorCodeEnum){
+    public static <T> CommonResult<T> error(ErrorCode errorCodeEnum){
         CommonResult<T> result = new CommonResult<>();
         result.setCode(errorCodeEnum.getCode());
         result.setMsg(errorCodeEnum.getMessage());
