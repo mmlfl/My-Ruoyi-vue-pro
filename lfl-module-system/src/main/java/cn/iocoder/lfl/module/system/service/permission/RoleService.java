@@ -7,7 +7,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
-public interface RoleService extends IService<RoleDO> {
+public interface RoleService  {
     List<RoleDO> getRoleList(Set<Long> roleIds);
 
     List<RoleDO> getRoleListFromCache(Collection<Long> roleIds);

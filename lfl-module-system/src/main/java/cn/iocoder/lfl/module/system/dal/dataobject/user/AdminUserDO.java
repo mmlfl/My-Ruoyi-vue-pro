@@ -2,13 +2,16 @@ package cn.iocoder.lfl.module.system.dal.dataobject.user;
 
 import cn.iocoder.lfl.framework.mybatis.core.dataobject.BaseDO;
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.extension.handlers.JacksonTypeHandler;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
 import java.util.Set;
 
 @TableName("system_users")
@@ -30,6 +33,7 @@ public class AdminUserDO extends BaseDO {
 
     private Long deptId;
 
+    @TableField(typeHandler = JacksonTypeHandler.class)
     private Set<Long> postIds;
 
     private String email;
@@ -48,7 +52,7 @@ public class AdminUserDO extends BaseDO {
     /**
      * 最后登录时间
      */
-    private String loginDate;
+    private LocalDateTime loginDate;
 
 
 }

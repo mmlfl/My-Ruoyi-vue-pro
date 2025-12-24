@@ -3,12 +3,14 @@ package cn.iocoder.lfl.module.system.controller.user.vo.user;
 import cn.hutool.core.util.ObjectUtil;
 import cn.iocoder.lfl.framework.common.validation.Mobile;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 import javax.validation.constraints.*;
 import java.util.Set;
 
+@Schema(description = "管理后台 - 用户创建 Request VO")
 @Data
 public class UserSaveReqVO {
 
@@ -18,7 +20,7 @@ public class UserSaveReqVO {
     @Schema(description = "用户名",requiredMode = Schema.RequiredMode.REQUIRED, example = "lfl")
     @NotBlank(message = "用户名不能为空")
     @Pattern(regexp = "^[a-zA-Z0-9]+$", message = "用户账号由 数字、字母 组成")
-    @Size(min = 4,max = 20, message = "用户账号长度为 4-20 个字符")
+    @Size(min = 3,max = 20, message = "用户账号长度为 3-20 个字符")
     private String username;
 
     @Schema(description = "用户昵称", example = "小王")
@@ -34,7 +36,7 @@ public class UserSaveReqVO {
     @Schema(description = "部门编号", example = "1")
     private Long deptId;
 
-    @Schema(description = "岗位编号数组", example = "1")
+    @Schema(description = "岗位编号数组", example = "[1]")
     private Set<Long> postIds;
 
     @Schema(description = "邮箱", example = "lfl@iocoder.cn")

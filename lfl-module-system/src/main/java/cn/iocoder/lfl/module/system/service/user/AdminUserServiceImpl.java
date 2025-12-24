@@ -1,7 +1,11 @@
 package cn.iocoder.lfl.module.system.service.user;
 
+import cn.hutool.core.collection.CollUtil;
 import cn.iocoder.lfl.framework.common.enums.CommonStatusEnum;
+import cn.iocoder.lfl.framework.common.pojo.PageResult;
 import cn.iocoder.lfl.framework.common.util.object.BeanUtils;
+import cn.iocoder.lfl.module.system.controller.user.vo.user.UserPageReqVO;
+import cn.iocoder.lfl.module.system.controller.user.vo.user.UserRespVO;
 import cn.iocoder.lfl.module.system.controller.user.vo.user.UserSaveReqVO;
 import cn.iocoder.lfl.module.system.dal.dataobject.user.AdminUserDO;
 import cn.iocoder.lfl.module.system.dal.mysql.user.AdminUserMapper;
@@ -10,6 +14,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
 import javax.annotation.Resource;
+import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 import static cn.iocoder.lfl.module.system.exception.util.ServiceExceptionUtil.exception;
@@ -35,6 +42,82 @@ public class AdminUserServiceImpl implements AdminUserService{
         userMapper.insert(user);
 
         return user.getId();
+    }
+
+    @Override
+    public void updateUser(UserSaveReqVO updateReqVO) {
+
+        //1. 校验正确性
+        AdminUserDO user = validateUserForCreateOrUpdate(updateReqVO.getId(),updateReqVO.getUsername(),
+                updateReqVO.getEmail(), updateReqVO.getMobile(),updateReqVO.getDeptId(),updateReqVO.getPostIds());
+        //2. 更新数据库
+        userMapper.updateById(user);
+    }
+
+    @Override
+    public void deleteUser(Long id) {
+        AdminUserDO user = userMapper.selectById(id);
+        if(Objects.isNull(user)){
+            throw exception(USER_NOT_EXISTS);
+        }
+        //删除用户
+        userMapper.deleteById(id);
+    }
+
+    @Override
+    public void deleteUserList(List<Long> ids) {
+        if(CollUtil.isEmpty(ids)){
+            return;
+        }
+        //批量删除用户
+        userMapper.deleteByIds(ids);
+    }
+
+
+
+
+    @Override
+    public void updateUserLogin(Long id, String loginIp) {
+        userMapper.updateById(AdminUserDO.builder().id(id).loginIp(loginIp).loginDate(LocalDateTime.now()).build());
+    }
+
+    @Override
+    public UserRespVO getUser(Integer id) {
+        AdminUserDO userDO = userMapper.selectById(id);
+        if(userDO == null){
+            return null;
+        }
+        UserRespVO respVO = BeanUtils.toBean(userDO, UserRespVO.class);
+        return respVO;
+    }
+
+    @Override
+    public void updateUserPassword(Long id, String password) {
+        //1.校验是否存在用户
+        validateUserExists(id);
+        //2.更新用户
+        AdminUserDO userDO = AdminUserDO.builder()
+                .id(id)
+                .password(encodePassword(password))
+                .build();
+        userMapper.updateById(userDO);
+    }
+
+    @Override
+    public void updateUserStatus(Long id, Integer status) {
+        // 1.校验用户是否存在
+        validateUserExists(id);
+        // 2.更新用户
+        AdminUserDO updateObj = new AdminUserDO();
+        updateObj.setId(id);
+        updateObj.setStatus(status);
+        userMapper.updateById(updateObj);
+    }
+
+    @Override
+    public PageResult<AdminUserDO> getUserPage(UserPageReqVO reqVO) {
+
+        return userMapper.selectPage(reqVO);
     }
 
 

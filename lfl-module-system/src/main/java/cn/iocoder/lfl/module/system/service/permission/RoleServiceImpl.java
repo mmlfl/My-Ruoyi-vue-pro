@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.Set;
 
 @Service
-public class RoleServiceImpl extends ServiceImpl<RoleMapper,RoleDO> implements RoleService{
+public class RoleServiceImpl implements RoleService{
 
     @Resource
     private RoleMapper roleMapper;
