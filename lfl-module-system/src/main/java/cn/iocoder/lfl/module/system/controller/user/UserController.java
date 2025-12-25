@@ -67,9 +67,9 @@ public class UserController {
         return CommonResult.success(true);
     }
 
-    @GetMapping("/page")
+    @PostMapping("/page")
     @Operation(summary = "获得用户分页列表")
-    public CommonResult<PageResult<UserRespVO>> getUserPage(@Validated UserPageReqVO reqVO){
+    public CommonResult<PageResult<UserRespVO>> getUserPage(@RequestBody @Validated UserPageReqVO reqVO){
         PageResult<AdminUserDO> page = userService.getUserPage(reqVO);
         if(page.getList().isEmpty()){
             return CommonResult.success(PageResult.empty());

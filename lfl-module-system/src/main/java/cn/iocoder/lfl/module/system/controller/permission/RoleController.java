@@ -69,19 +69,14 @@ public class RoleController {
         return CommonResult.success(respVO);
     }
 
-    @GetMapping("/page")
+    @PostMapping("/page")
     @Operation(summary = "获得角色分页")
-    public CommonResult<PageResult<RoleRespVO>> getRolePage(RolePageReqVO reqVO){
+    public CommonResult<PageResult<RoleRespVO>> getRolePage(@RequestBody @Valid RolePageReqVO reqVO){
         PageResult<RoleDO> pageResult = roleService.getRolePage(reqVO);
         //1.校验列表是否为空
         if(CollUtil.isEmpty(pageResult.getList())){
             return CommonResult.success(PageResult.empty());
         }
-        List<RoleRespVO> list = pageResult.getList().stream().map(role -> {
-            RoleRespVO respVO = BeanUtils.toBean(role, RoleRespVO.class);
-            return respVO;
-        }).toList();
-
-        return CommonResult.success(new PageResult<>(list, pageResult.getTotal()));
+        return CommonResult.success(BeanUtils.toBean(pageResult,RoleRespVO.class));
     }
 }

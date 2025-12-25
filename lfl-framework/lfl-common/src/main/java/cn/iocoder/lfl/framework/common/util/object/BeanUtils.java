@@ -2,6 +2,11 @@ package cn.iocoder.lfl.framework.common.util.object;
 
 
 import cn.hutool.core.bean.BeanUtil;
+import cn.iocoder.lfl.framework.common.pojo.PageResult;
+import cn.iocoder.lfl.framework.common.util.collection.CollectionUtils;
+
+import java.util.List;
+import java.util.function.Consumer;
 
 /**
  * Bean 工具类
@@ -13,5 +18,30 @@ import cn.hutool.core.bean.BeanUtil;
 public class BeanUtils {
     public static <T> T toBean(Object source, Class<T> targetClass){
         return BeanUtil.toBean(source, targetClass);
+    }
+
+    public static <S,T> List<T> toBean(List<S> source, Class<T> targetType){
+        if(source == null){
+            return null;
+        }
+        return CollectionUtils.convertList(source,s -> toBean(s,targetType));
+    }
+
+    public static <S,T> PageResult<T> toBean(PageResult<S> source,Class<T> targetType){
+        if(source == null){
+            return null;
+        }
+        return toBean(source,targetType,null);
+    }
+
+    public static <S,T> PageResult<T> toBean(PageResult<S> source, Class<T> targetType, Consumer<T> peek) {
+        if(source == null){
+            return null;
+        }
+        List<T> list = toBean(source.getList(),targetType);
+        if(peek != null){
+            list.forEach(peek);
+        }
+        return new PageResult<>(list,source.getTotal());
     }
 }

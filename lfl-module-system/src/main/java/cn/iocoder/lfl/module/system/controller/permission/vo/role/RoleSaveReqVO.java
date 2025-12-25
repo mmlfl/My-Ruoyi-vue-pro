@@ -4,13 +4,10 @@ import cn.iocoder.lfl.framework.common.enums.CommonStatusEnum;
 import cn.iocoder.lfl.framework.common.validation.InEnum;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
-import org.springframework.scheduling.concurrent.ScheduledExecutorTask;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.util.Set;
-
 @Schema(description = "管理后台 - 角色创建 Request VO")
 @Data
 public class RoleSaveReqVO {
