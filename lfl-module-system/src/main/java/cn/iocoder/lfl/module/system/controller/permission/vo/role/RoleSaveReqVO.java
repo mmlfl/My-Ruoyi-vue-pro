@@ -8,6 +8,7 @@ import lombok.Data;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
 @Schema(description = "管理后台 - 角色创建 Request VO")
 @Data
 public class RoleSaveReqVO {
