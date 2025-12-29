@@ -1,4 +1,4 @@
-package cn.iocoder.lfl.module.system.controller.dept.vo;
+package cn.iocoder.lfl.module.system.controller.admin.dept.vo;
 
 import cn.iocoder.lfl.framework.common.enums.CommonStatusEnum;
 import cn.iocoder.lfl.framework.common.validation.InEnum;

@@ -1,4 +1,4 @@
-package cn.iocoder.lfl.module.system.controller.permission.vo.menu;
+package cn.iocoder.lfl.module.system.controller.admin.permission.vo.menu;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;

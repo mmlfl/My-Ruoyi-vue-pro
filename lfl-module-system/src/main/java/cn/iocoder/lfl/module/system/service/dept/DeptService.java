@@ -1,11 +1,10 @@
 package cn.iocoder.lfl.module.system.service.dept;
 
-import cn.iocoder.lfl.module.system.controller.dept.vo.DeptListReqVO;
-import cn.iocoder.lfl.module.system.controller.dept.vo.DeptRespVO;
-import cn.iocoder.lfl.module.system.controller.dept.vo.DeptSaveReqVO;
+import cn.iocoder.lfl.module.system.controller.admin.dept.vo.DeptListReqVO;
+import cn.iocoder.lfl.module.system.controller.admin.dept.vo.DeptRespVO;
+import cn.iocoder.lfl.module.system.controller.admin.dept.vo.DeptSaveReqVO;
 import cn.iocoder.lfl.module.system.dal.dataobject.dept.DeptDO;
 
-import javax.validation.Valid;
 import java.util.List;
 
 public interface DeptService {

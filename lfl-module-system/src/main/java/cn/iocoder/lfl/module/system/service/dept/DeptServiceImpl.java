@@ -2,9 +2,9 @@ package cn.iocoder.lfl.module.system.service.dept;
 
 import cn.hutool.core.util.ObjectUtil;
 import cn.iocoder.lfl.framework.common.util.object.BeanUtils;
-import cn.iocoder.lfl.module.system.controller.dept.vo.DeptListReqVO;
-import cn.iocoder.lfl.module.system.controller.dept.vo.DeptRespVO;
-import cn.iocoder.lfl.module.system.controller.dept.vo.DeptSaveReqVO;
+import cn.iocoder.lfl.module.system.controller.admin.dept.vo.DeptListReqVO;
+import cn.iocoder.lfl.module.system.controller.admin.dept.vo.DeptRespVO;
+import cn.iocoder.lfl.module.system.controller.admin.dept.vo.DeptSaveReqVO;
 import cn.iocoder.lfl.module.system.dal.dataobject.dept.DeptDO;
 import cn.iocoder.lfl.module.system.dal.mysql.dept.DeptMapper;
 import cn.iocoder.lfl.module.system.enums.social.ErrorCodeConstants;

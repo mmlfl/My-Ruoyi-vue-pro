@@ -1,17 +1,16 @@
-package cn.iocoder.lfl.module.system.controller.dept;
+package cn.iocoder.lfl.module.system.controller.admin.dept;
 
 import cn.iocoder.lfl.framework.common.enums.CommonStatusEnum;
 import cn.iocoder.lfl.framework.common.pojo.CommonResult;
 import cn.iocoder.lfl.framework.common.util.object.BeanUtils;
-import cn.iocoder.lfl.module.system.controller.dept.vo.DeptListReqVO;
-import cn.iocoder.lfl.module.system.controller.dept.vo.DeptRespVO;
-import cn.iocoder.lfl.module.system.controller.dept.vo.DeptSaveReqVO;
-import cn.iocoder.lfl.module.system.controller.dept.vo.DeptSimpleRespVO;
+import cn.iocoder.lfl.module.system.controller.admin.dept.vo.DeptListReqVO;
+import cn.iocoder.lfl.module.system.controller.admin.dept.vo.DeptRespVO;
+import cn.iocoder.lfl.module.system.controller.admin.dept.vo.DeptSaveReqVO;
+import cn.iocoder.lfl.module.system.controller.admin.dept.vo.DeptSimpleRespVO;
 import cn.iocoder.lfl.module.system.dal.dataobject.dept.DeptDO;
 import cn.iocoder.lfl.module.system.service.dept.DeptService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import org.apache.ibatis.annotations.Delete;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 

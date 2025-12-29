@@ -1,4 +1,4 @@
-package cn.iocoder.lfl.module.system.controller.user.vo.user;
+package cn.iocoder.lfl.module.system.controller.admin.user.vo.user;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;

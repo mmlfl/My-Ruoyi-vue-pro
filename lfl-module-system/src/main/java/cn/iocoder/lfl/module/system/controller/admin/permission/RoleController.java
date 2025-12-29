@@ -1,13 +1,13 @@
-package cn.iocoder.lfl.module.system.controller.permission;
+package cn.iocoder.lfl.module.system.controller.admin.permission;
 
 import cn.hutool.core.collection.CollUtil;
 import cn.iocoder.lfl.framework.common.pojo.CommonResult;
 import cn.iocoder.lfl.framework.common.pojo.PageResult;
 import cn.iocoder.lfl.framework.common.util.object.BeanUtils;
-import cn.iocoder.lfl.module.system.controller.permission.vo.role.RolePageReqVO;
-import cn.iocoder.lfl.module.system.controller.permission.vo.role.RoleRespVO;
-import cn.iocoder.lfl.module.system.controller.permission.vo.role.RoleSaveReqVO;
-import cn.iocoder.lfl.module.system.controller.permission.vo.role.RoleUpdateStatusReqVO;
+import cn.iocoder.lfl.module.system.controller.admin.permission.vo.role.RolePageReqVO;
+import cn.iocoder.lfl.module.system.controller.admin.permission.vo.role.RoleRespVO;
+import cn.iocoder.lfl.module.system.controller.admin.permission.vo.role.RoleSaveReqVO;
+import cn.iocoder.lfl.module.system.controller.admin.permission.vo.role.RoleUpdateStatusReqVO;
 import cn.iocoder.lfl.module.system.dal.dataobject.permission.RoleDO;
 import cn.iocoder.lfl.module.system.service.permission.RoleService;
 import io.swagger.v3.oas.annotations.Operation;

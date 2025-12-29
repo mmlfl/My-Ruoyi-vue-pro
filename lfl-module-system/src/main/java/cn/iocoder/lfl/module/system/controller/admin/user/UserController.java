@@ -1,10 +1,9 @@
-package cn.iocoder.lfl.module.system.controller.user;
+package cn.iocoder.lfl.module.system.controller.admin.user;
 
-import cn.hutool.core.bean.BeanUtil;
 import cn.iocoder.lfl.framework.common.pojo.CommonResult;
 import cn.iocoder.lfl.framework.common.pojo.PageResult;
 import cn.iocoder.lfl.framework.common.util.object.BeanUtils;
-import cn.iocoder.lfl.module.system.controller.user.vo.user.*;
+import cn.iocoder.lfl.module.system.controller.admin.user.vo.user.*;
 import cn.iocoder.lfl.module.system.dal.dataobject.user.AdminUserDO;
 import cn.iocoder.lfl.module.system.service.user.AdminUserService;
 import io.swagger.v3.oas.annotations.Operation;

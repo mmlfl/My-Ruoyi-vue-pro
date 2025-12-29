@@ -1,4 +1,4 @@
-package cn.iocoder.lfl.module.system.controller.dept.vo;
+package cn.iocoder.lfl.module.system.controller.admin.dept.vo;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;

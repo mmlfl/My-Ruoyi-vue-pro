@@ -1,4 +1,4 @@
-package cn.iocoder.lfl.module.system.controller.user.vo.user;
+package cn.iocoder.lfl.module.system.controller.admin.user.vo.user;
 
 import cn.iocoder.lfl.framework.common.pojo.PageParam;
 import io.swagger.v3.oas.annotations.media.Schema;

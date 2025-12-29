@@ -1,22 +1,18 @@
 package cn.iocoder.lfl.module.system.service.permission;
 
-import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.extra.spring.SpringUtil;
 import cn.iocoder.lfl.framework.common.pojo.PageResult;
 import cn.iocoder.lfl.framework.common.util.collection.CollectionUtils;
 import cn.iocoder.lfl.framework.common.util.object.BeanUtils;
-import cn.iocoder.lfl.module.system.controller.permission.vo.role.RolePageReqVO;
-import cn.iocoder.lfl.module.system.controller.permission.vo.role.RoleRespVO;
-import cn.iocoder.lfl.module.system.controller.permission.vo.role.RoleSaveReqVO;
+import cn.iocoder.lfl.module.system.controller.admin.permission.vo.role.RolePageReqVO;
+import cn.iocoder.lfl.module.system.controller.admin.permission.vo.role.RoleRespVO;
+import cn.iocoder.lfl.module.system.controller.admin.permission.vo.role.RoleSaveReqVO;
 import cn.iocoder.lfl.module.system.dal.dataobject.permission.RoleDO;
 import cn.iocoder.lfl.module.system.dal.mysql.permission.RoleMapper;
 import cn.iocoder.lfl.module.system.dal.redis.RedisConstants;
 import cn.iocoder.lfl.module.system.enums.permission.RoleCodeEnum;
 import cn.iocoder.lfl.module.system.enums.social.ErrorCodeConstants;
-import cn.iocoder.lfl.module.system.exception.util.ServiceExceptionUtil;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import org.springframework.beans.factory.BeanFactoryUtils;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 

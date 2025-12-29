@@ -1,15 +1,12 @@
 package cn.iocoder.lfl.module.system.service.user;
 
 import cn.iocoder.lfl.framework.common.pojo.PageResult;
-import cn.iocoder.lfl.module.system.controller.user.vo.user.UserPageReqVO;
-import cn.iocoder.lfl.module.system.controller.user.vo.user.UserRespVO;
-import cn.iocoder.lfl.module.system.controller.user.vo.user.UserSaveReqVO;
+import cn.iocoder.lfl.module.system.controller.admin.user.vo.user.UserPageReqVO;
+import cn.iocoder.lfl.module.system.controller.admin.user.vo.user.UserRespVO;
+import cn.iocoder.lfl.module.system.controller.admin.user.vo.user.UserSaveReqVO;
 import cn.iocoder.lfl.module.system.dal.dataobject.user.AdminUserDO;
-import org.hibernate.validator.constraints.Length;
 
 import javax.validation.Valid;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 import java.util.List;
 
 public interface AdminUserService {

@@ -1,4 +1,4 @@
-package cn.iocoder.lfl.module.system.controller.permission.vo.role;
+package cn.iocoder.lfl.module.system.controller.admin.permission.vo.role;
 
 import cn.iocoder.lfl.framework.common.enums.CommonStatusEnum;
 import cn.iocoder.lfl.framework.common.validation.InEnum;

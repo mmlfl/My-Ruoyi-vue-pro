@@ -1,4 +1,4 @@
-package cn.iocoder.lfl.module.system.controller.user.vo.user;
+package cn.iocoder.lfl.module.system.controller.admin.user.vo.user;
 
 import cn.hutool.core.util.ObjectUtil;
 import cn.iocoder.lfl.framework.common.validation.Mobile;

@@ -1,9 +1,9 @@
-package cn.iocoder.lfl.module.system.controller.permission;
+package cn.iocoder.lfl.module.system.controller.admin.permission;
 
 import cn.iocoder.lfl.framework.common.pojo.CommonResult;
-import cn.iocoder.lfl.module.system.controller.permission.vo.menu.MenuListReqVO;
-import cn.iocoder.lfl.module.system.controller.permission.vo.menu.MenuRespVO;
-import cn.iocoder.lfl.module.system.controller.permission.vo.menu.MenuSaveReqVO;
+import cn.iocoder.lfl.module.system.controller.admin.permission.vo.menu.MenuListReqVO;
+import cn.iocoder.lfl.module.system.controller.admin.permission.vo.menu.MenuRespVO;
+import cn.iocoder.lfl.module.system.controller.admin.permission.vo.menu.MenuSaveReqVO;
 import cn.iocoder.lfl.module.system.service.permission.MenuService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;

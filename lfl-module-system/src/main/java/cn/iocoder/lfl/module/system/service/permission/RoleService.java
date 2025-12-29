@@ -1,14 +1,11 @@
 package cn.iocoder.lfl.module.system.service.permission;
 
 import cn.iocoder.lfl.framework.common.pojo.PageResult;
-import cn.iocoder.lfl.module.system.controller.permission.vo.role.RolePageReqVO;
-import cn.iocoder.lfl.module.system.controller.permission.vo.role.RoleRespVO;
-import cn.iocoder.lfl.module.system.controller.permission.vo.role.RoleSaveReqVO;
+import cn.iocoder.lfl.module.system.controller.admin.permission.vo.role.RolePageReqVO;
+import cn.iocoder.lfl.module.system.controller.admin.permission.vo.role.RoleRespVO;
+import cn.iocoder.lfl.module.system.controller.admin.permission.vo.role.RoleSaveReqVO;
 import cn.iocoder.lfl.module.system.dal.dataobject.permission.RoleDO;
-import com.baomidou.mybatisplus.extension.service.IService;
 
-import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
 import java.util.Collection;
 import java.util.List;
 import java.util.Set;
