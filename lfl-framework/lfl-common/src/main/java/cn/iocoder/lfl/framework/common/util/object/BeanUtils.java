@@ -2,6 +2,7 @@ package cn.iocoder.lfl.framework.common.util.object;
 
 
 import cn.hutool.core.bean.BeanUtil;
+import cn.hutool.core.util.ObjectUtil;
 import cn.iocoder.lfl.framework.common.pojo.PageResult;
 import cn.iocoder.lfl.framework.common.util.collection.CollectionUtils;
 
@@ -21,7 +22,7 @@ public class BeanUtils {
     }
 
     public static <S,T> List<T> toBean(List<S> source, Class<T> targetType){
-        if(source == null){
+        if(ObjectUtil.isEmpty( source)){
             return null;
         }
         return CollectionUtils.convertList(source,s -> toBean(s,targetType));
