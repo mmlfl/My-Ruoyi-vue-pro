@@ -2,7 +2,7 @@ package cn.iocoder.lfl.module.system.dal.mysql.dept;
 
 import cn.iocoder.lfl.framework.mybatis.core.mybatis.BaseMapperX;
 import cn.iocoder.lfl.framework.mybatis.core.query.LambdaQueryWrapperX;
-import cn.iocoder.lfl.module.system.controller.admin.dept.vo.DeptListReqVO;
+import cn.iocoder.lfl.module.system.controller.admin.dept.vo.dept.DeptListReqVO;
 import cn.iocoder.lfl.module.system.dal.dataobject.dept.DeptDO;
 import org.apache.ibatis.annotations.Mapper;
 

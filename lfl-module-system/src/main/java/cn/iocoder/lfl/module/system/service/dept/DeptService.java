@@ -1,8 +1,8 @@
 package cn.iocoder.lfl.module.system.service.dept;
 
-import cn.iocoder.lfl.module.system.controller.admin.dept.vo.DeptListReqVO;
-import cn.iocoder.lfl.module.system.controller.admin.dept.vo.DeptRespVO;
-import cn.iocoder.lfl.module.system.controller.admin.dept.vo.DeptSaveReqVO;
+import cn.iocoder.lfl.module.system.controller.admin.dept.vo.dept.DeptListReqVO;
+import cn.iocoder.lfl.module.system.controller.admin.dept.vo.dept.DeptRespVO;
+import cn.iocoder.lfl.module.system.controller.admin.dept.vo.dept.DeptSaveReqVO;
 import cn.iocoder.lfl.module.system.dal.dataobject.dept.DeptDO;
 
 import java.util.List;

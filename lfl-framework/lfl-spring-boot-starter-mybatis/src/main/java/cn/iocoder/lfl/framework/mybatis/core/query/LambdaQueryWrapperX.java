@@ -8,6 +8,7 @@ import org.apache.commons.lang3.ArrayUtils;
 import org.springframework.util.StringUtils;
 
 import java.time.LocalDateTime;
+import java.util.Collection;
 import java.util.Objects;
 
 
@@ -43,6 +44,13 @@ public class LambdaQueryWrapperX<T> extends LambdaQueryWrapper<T> {
         }
         if(val2 != null){
             return (LambdaQueryWrapperX<T>) super.le(column,val2);
+        }
+        return this;
+    }
+
+    public LambdaQueryWrapperX<T> inIfPresent(SFunction<T,?> column, Collection<?> values) {
+        if(ObjectUtil.isAllNotEmpty(values)){
+            return (LambdaQueryWrapperX<T>)super.in(column,values);
         }
         return this;
     }
