@@ -6,6 +6,7 @@ import cn.iocoder.lfl.framework.common.pojo.SortingField;
 import cn.iocoder.lfl.framework.mybatis.core.util.MyBatisUtils;
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.support.SFunction;
 import com.github.yulichang.base.MPJBaseMapper;
@@ -47,6 +48,9 @@ public interface BaseMapperX<T> extends MPJBaseMapper<T> {
         return selectOne(new LambdaQueryWrapper<T>().eq(field1,value1).eq(field2,value2));
     }
 
+    default List<T> selectList(){
+        return selectList(new QueryWrapper<>());
+    }
 
     default Long selectCount(SFunction<T,?> field,Object value){
         return selectCount(new LambdaQueryWrapper<T>().eq(field,value));
