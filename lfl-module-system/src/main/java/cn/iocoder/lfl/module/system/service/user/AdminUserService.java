@@ -20,7 +20,7 @@ public interface AdminUserService {
 
      void updateUserLogin(Long id,String loginIp);
 
-     UserRespVO getUser(Integer id);
+     UserRespVO getUser(Long id);
 
      void updateUserPassword(Long id,String password);
 

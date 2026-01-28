@@ -9,7 +9,7 @@ import cn.iocoder.lfl.module.system.controller.admin.permission.vo.menu.MenuResp
 import cn.iocoder.lfl.module.system.controller.admin.permission.vo.menu.MenuSaveReqVO;
 import cn.iocoder.lfl.module.system.dal.dataobject.permission.MenuDO;
 import cn.iocoder.lfl.module.system.dal.mysql.permission.MenuMapper;
-import cn.iocoder.lfl.module.system.dal.redis.RedisConstants;
+import cn.iocoder.lfl.module.system.dal.redis.RedisKeyConstants;
 import cn.iocoder.lfl.module.system.enums.permission.MenuTypeEnum;
 import cn.iocoder.lfl.module.system.enums.social.ErrorCodeConstants;
 import org.springframework.cache.annotation.CacheEvict;
@@ -33,14 +33,14 @@ public class MenuServiceImpl implements MenuService{
     }
 
     @Override
-    @Cacheable(value = RedisConstants.PERMISSION_MENU_ID_LIST,key = "#permission")
+    @Cacheable(value = RedisKeyConstants.PERMISSION_MENU_ID_LIST,key = "#permission")
     public List<Long> getMenuIdListByPermissionFromCache(String permission) {
         List<MenuDO> menuDOS = menuMapper.selectListByPermission(permission);
         return CollectionUtils.convertList(menuDOS,MenuDO::getId);
     }
 
     @Override
-    @CacheEvict(value = RedisConstants.PERMISSION_MENU_ID_LIST,key = "#reqVO.permission",
+    @CacheEvict(value = RedisKeyConstants.PERMISSION_MENU_ID_LIST,key = "#reqVO.permission",
                     condition = "#reqVO.permission != null ")
     public Long createMenu(MenuSaveReqVO reqVO) {
         //校验父菜单
@@ -57,7 +57,7 @@ public class MenuServiceImpl implements MenuService{
     }
 
     @Override
-    @CacheEvict(value = RedisConstants.PERMISSION_MENU_ID_LIST,allEntries = true)//更新可能会涉及两个permission,所以直接清空缓存.
+    @CacheEvict(value = RedisKeyConstants.PERMISSION_MENU_ID_LIST,allEntries = true)//更新可能会涉及两个permission,所以直接清空缓存.
     public void updateMenu(MenuSaveReqVO reqVO) {
         //检验更新的菜单是否存在
         if(menuMapper.selectById(reqVO.getId()) == null){

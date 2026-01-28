@@ -16,6 +16,7 @@
         <module>lfl-common</module>
         <module>lfl-spring-boot-starter-web</module>
         <module>lfl-spring-boot-starter-redis</module>
+        <module>lfl-spring-boot-starter-biz-data-permission</module>
     </modules>
 
     <description>

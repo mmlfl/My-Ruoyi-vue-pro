@@ -1,5 +1,6 @@
 package cn.iocoder.lfl.module.system.api.permission;
 
+import cn.iocoder.lfl.framework.common.biz.system.permission.dto.DeptDataPermissionRespDTO;
 import cn.iocoder.lfl.module.system.service.permission.PermissionService;
 import org.springframework.stereotype.Service;
 
@@ -8,7 +9,7 @@ import java.util.Collection;
 import java.util.Set;
 
 @Service
-public class PermissionApiImpl implements PermmsionApi{
+public class PermissionApiImpl implements PermissionApi{
 
     @Resource
     private PermissionService permissionService;
@@ -26,5 +27,10 @@ public class PermissionApiImpl implements PermmsionApi{
     @Override
     public boolean hasAnyRoles(Long userId, String... roles) {
         return permissionService.hasAnyRoles(userId, roles);
+    }
+
+    @Override
+    public DeptDataPermissionRespDTO getDeptDataPermission(Long id) {
+        return permissionService.getDeptDataPermission(id);
     }
 }

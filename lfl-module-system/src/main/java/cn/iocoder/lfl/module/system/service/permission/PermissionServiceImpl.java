@@ -3,6 +3,7 @@ package cn.iocoder.lfl.module.system.service.permission;
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.ArrayUtil;
 import cn.hutool.extra.spring.SpringUtil;
+import cn.iocoder.lfl.framework.common.biz.system.permission.dto.DeptDataPermissionRespDTO;
 import cn.iocoder.lfl.framework.common.enums.CommonStatusEnum;
 import cn.iocoder.lfl.framework.common.util.collection.CollectionUtils;
 import cn.iocoder.lfl.module.system.dal.dataobject.permission.RoleDO;
@@ -10,21 +11,26 @@ import cn.iocoder.lfl.module.system.dal.dataobject.permission.RoleMenuDO;
 import cn.iocoder.lfl.module.system.dal.dataobject.permission.UserRoleDO;
 import cn.iocoder.lfl.module.system.dal.mysql.permission.RoleMenuMapper;
 import cn.iocoder.lfl.module.system.dal.mysql.permission.UserRoleMapper;
-import cn.iocoder.lfl.module.system.dal.redis.RedisConstants;
-import org.redisson.api.redisnode.SetSlotCommand;
+import cn.iocoder.lfl.module.system.dal.redis.RedisKeyConstants;
+import cn.iocoder.lfl.module.system.enums.permission.DataScopeEnum;
+import cn.iocoder.lfl.module.system.service.dept.DeptService;
+import cn.iocoder.lfl.module.system.service.user.AdminUserService;
+import com.google.common.base.Suppliers;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
+import java.util.function.Supplier;
 
 import static cn.iocoder.lfl.framework.common.util.collection.CollectionUtils.converSet;
 import static cn.iocoder.lfl.framework.common.util.collection.CollectionUtils.convertList;
+import static cn.iocoder.lfl.framework.common.util.json.JsonUtils.toJsonString;
 
 @Service
+@Slf4j
 public class PermissionServiceImpl implements PermissionService{
 
     @Resource
@@ -36,6 +42,10 @@ public class PermissionServiceImpl implements PermissionService{
     private RoleService roleService;
     @Resource
     private MenuService menuService;
+    @Resource
+    private AdminUserService userService;
+    @Autowired
+    private DeptService deptService;
 
     @Override
     public boolean hasAnyPermissions(Long userId, String... permissions) {
@@ -95,7 +105,7 @@ public class PermissionServiceImpl implements PermissionService{
 
     // ========== 角色-菜单的相关方法  ========== 以下
 
-    @Cacheable(value = RedisConstants.MENU_ROLE_ID_LIST,key = "#menuId")
+    @Cacheable(value = RedisKeyConstants.MENU_ROLE_ID_LIST,key = "#menuId")
     public List<Long> getMenuRoleIdListByMenuIdFromCache(Long menuId) {
         return convertList(roleMenuMapper.selectListByMenuId(menuId), RoleMenuDO::getRoleId);
     }
@@ -112,10 +122,61 @@ public class PermissionServiceImpl implements PermissionService{
     }
 
     @Override
-    @Cacheable(value = RedisConstants.USER_ROLE_ID_LIST,key = "#userId"
+    @Cacheable(value = RedisKeyConstants.USER_ROLE_ID_LIST,key = "#userId"
             ,unless = "#result = null ")
     public Set<Long> getUserRoleIdListByUserIdFromCache(Long userId) {
         return getUserRoleIdListByUserId(userId);
+    }
+
+    @Override
+    public DeptDataPermissionRespDTO getDeptDataPermission(Long userId) {
+        // 获得用户的角色
+        List<RoleDO> roles = getEnableUserRoleListByUserIdFromCache(userId);
+        //如果角色为空,则只能查看自己
+        DeptDataPermissionRespDTO result = new DeptDataPermissionRespDTO();
+        if(CollUtil.isEmpty(roles)){
+            result.setSelf(true);
+            return result;
+        }
+        // 获得用户的部门编号的缓存，通过 Guava 的 Suppliers 惰性求值，即有且仅有第一次发起 DB 的查询
+        Supplier<Long> userDeptId = Suppliers.memoize(() -> userService.getUser(userId).getDeptId());
+        //遍历每个角色,进行计算
+        for (RoleDO role : roles) {
+            // 为空时，跳过
+            if (role.getDataScope() == null) {
+                continue;
+            }
+            // 情况一，ALL
+            if (Objects.equals(role.getDataScope(), DataScopeEnum.ALL.getScope())) {
+                result.setAll(true);
+                continue;
+            }
+            // 情况二，DEPT_CUSTOM
+            if (Objects.equals(role.getDataScope(), DataScopeEnum.DEPT_CUSTOM.getScope())) {
+                result.setDeptIds(role.getDataScopeDeptIds());
+                continue;
+            }
+            // 情况三，DEPT_ONLY
+            if (Objects.equals(role.getDataScope(), DataScopeEnum.DEPT_ONLY.getScope())) {
+                CollectionUtils.addIfNotNull(result.getDeptIds(), userDeptId.get());
+                continue;
+            }
+            // 情况四，DEPT_CHILDREN
+            if (Objects.equals(role.getDataScope(), DataScopeEnum.DEPT_AND_CHILD.getScope())) {
+                CollUtil.addAll(result.getDeptIds(),deptService.getChildDeptIdListFromCache(userDeptId.get()));
+                // 添加本身部门编号
+                CollUtil.addAll(result.getDeptIds(), userDeptId.get());
+                continue;
+            }
+            // 情况五，DEPT_SELF
+            if (Objects.equals(role.getDataScope(), DataScopeEnum.SELF.getScope())) {
+                result.setSelf(true);
+                continue;
+            }
+            //未知情况
+            log.error("[getDeptDataPermission][LoginUser({}) role({}) 无法处理]", userId, toJsonString(result));
+        }
+        return result;
     }
 
     @Override

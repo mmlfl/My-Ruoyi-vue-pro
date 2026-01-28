@@ -6,6 +6,7 @@ import cn.iocoder.lfl.module.system.controller.admin.dept.vo.dept.DeptListReqVO;
 import cn.iocoder.lfl.module.system.dal.dataobject.dept.DeptDO;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.Collection;
 import java.util.List;
 
 @Mapper
@@ -27,5 +28,9 @@ public interface DeptMapper extends BaseMapperX<DeptDO> {
                 .likeIfPresent(DeptDO::getName, reqVO.getName())
                 .eqIfPresent(DeptDO::getStatus, reqVO.getStatus())
         );
+    }
+
+    default List<DeptDO> selectListByParentId(Collection<Long> deptIds) {
+        return selectList(DeptDO::getParentId,deptIds);
     }
 }

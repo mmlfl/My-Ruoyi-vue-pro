@@ -32,4 +32,6 @@ management:
   endpoints:
     web:
       exposure:
-        include: beans,env,mappings,health
+        include: beans,env,mappings,healt
+
+

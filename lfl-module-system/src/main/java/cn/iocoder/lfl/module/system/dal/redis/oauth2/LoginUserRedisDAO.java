@@ -3,7 +3,7 @@ package cn.iocoder.lfl.module.system.dal.redis.oauth2;
 
 import cn.iocoder.lfl.framework.common.util.json.JsonUtils;
 import cn.iocoder.lfl.framework.security.core.LoginUser;
-import cn.iocoder.lfl.module.system.dal.redis.RedisConstants;
+import cn.iocoder.lfl.module.system.dal.redis.RedisKeyConstants;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -46,7 +46,7 @@ public class LoginUserRedisDAO {
      * @return
      */
     public String formatTokenKey(String token){
-        return String.format(RedisConstants.LOGIN_USER_KEY,token);
+        return String.format(RedisKeyConstants.LOGIN_USER_KEY,token);
     }
 
     /**
@@ -56,6 +56,6 @@ public class LoginUserRedisDAO {
      * @return
      */
     public String formateActiveTokenKey(Long id,Integer UserType){
-        return String.format(RedisConstants.USER_ACTIVE_TOKEN_KEY,id,UserType);
+        return String.format(RedisKeyConstants.USER_ACTIVE_TOKEN_KEY,id,UserType);
     }
 }

@@ -1,5 +1,7 @@
 package cn.iocoder.lfl.module.system.service.permission;
 
+import cn.iocoder.lfl.framework.common.biz.system.permission.dto.DeptDataPermissionRespDTO;
+
 import java.util.Collection;
 import java.util.Set;
 
@@ -46,4 +48,5 @@ public interface PermissionService {
      */
     Set<Long> getUserRoleIdListByUserIdFromCache(Long userId);
 
+    DeptDataPermissionRespDTO getDeptDataPermission(Long id);
 }

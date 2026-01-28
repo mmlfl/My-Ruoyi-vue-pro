@@ -82,7 +82,7 @@ public class AdminUserServiceImpl implements AdminUserService{
     }
 
     @Override
-    public UserRespVO getUser(Integer id) {
+    public UserRespVO getUser(Long id) {
         AdminUserDO userDO = userMapper.selectById(id);
         if(userDO == null){
             return null;

@@ -1,5 +1,6 @@
 package cn.iocoder.lfl.framework.mybatis.core.mybatis;
 
+import cn.hutool.core.collection.CollUtil;
 import cn.iocoder.lfl.framework.common.pojo.PageParam;
 import cn.iocoder.lfl.framework.common.pojo.PageResult;
 import cn.iocoder.lfl.framework.common.pojo.SortingField;
@@ -20,7 +21,12 @@ public interface BaseMapperX<T> extends MPJBaseMapper<T> {
     default List<T> selectList(SFunction<T,?> field,Object value){
         return selectList(new LambdaQueryWrapper<T>().eq(field,value));
     }
-
+    default List<T> selectList(SFunction<T,?> field,Collection<?> values){
+        if(CollUtil.isEmpty(values)){
+            return CollUtil.newArrayList();
+        }
+        return selectList(new LambdaQueryWrapper<T>().in(field,values));
+    }
     default T selectOne(SFunction<T,?> field,Object value){
         return selectOne(new LambdaQueryWrapper<T>().eq(field,value));
     }

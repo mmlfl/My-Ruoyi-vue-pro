@@ -8,13 +8,17 @@ import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.OrderItem;
+import com.baomidou.mybatisplus.core.toolkit.StringPool;
+import com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor;
+import com.baomidou.mybatisplus.extension.plugins.inner.InnerInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import net.sf.jsqlparser.expression.Alias;
+import net.sf.jsqlparser.schema.Column;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 public class MyBatisUtils {
-
-
 
 
     @SuppressWarnings("PatterVariableCanBeUsed")
@@ -58,5 +62,18 @@ public class MyBatisUtils {
             }
         }
         return page;
+    }
+
+    public static void addInterceptor(MybatisPlusInterceptor interceptor, InnerInterceptor inner,int index){
+        ArrayList<InnerInterceptor> inners = new ArrayList<>(interceptor.getInterceptors());
+        inners.add(index,inner);
+        interceptor.setInterceptors(inners);
+    }
+
+    public static Column buildColumn(String tableName, Alias tableAlias, String column) {
+        if(tableAlias != null){
+            tableName = tableAlias.getName();
+        }
+        return new Column(tableName + StringPool.DOT + column);
     }
 }

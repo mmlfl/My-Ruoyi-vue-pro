@@ -5,7 +5,10 @@ import cn.iocoder.lfl.module.system.controller.admin.dept.vo.dept.DeptRespVO;
 import cn.iocoder.lfl.module.system.controller.admin.dept.vo.dept.DeptSaveReqVO;
 import cn.iocoder.lfl.module.system.dal.dataobject.dept.DeptDO;
 
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 
 public interface DeptService {
     Long createDept(DeptSaveReqVO reqVO);
@@ -19,4 +22,13 @@ public interface DeptService {
     DeptRespVO getDept(Long id);
 
     List<DeptDO> getDeptList(DeptListReqVO reqVO);
+
+
+    Set<Long> getChildDeptIdListFromCache(Long deptId);
+
+    default List<DeptDO> getChildDeptList(Long deptId){
+        return getChildDeptList(Collections.singleton(deptId));
+    }
+
+    List<DeptDO> getChildDeptList(Collection<Long> deptIds);
 }

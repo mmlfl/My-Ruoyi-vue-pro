@@ -10,7 +10,7 @@ import cn.iocoder.lfl.module.system.controller.admin.permission.vo.role.RoleResp
 import cn.iocoder.lfl.module.system.controller.admin.permission.vo.role.RoleSaveReqVO;
 import cn.iocoder.lfl.module.system.dal.dataobject.permission.RoleDO;
 import cn.iocoder.lfl.module.system.dal.mysql.permission.RoleMapper;
-import cn.iocoder.lfl.module.system.dal.redis.RedisConstants;
+import cn.iocoder.lfl.module.system.dal.redis.RedisKeyConstants;
 import cn.iocoder.lfl.module.system.enums.permission.RoleCodeEnum;
 import cn.iocoder.lfl.module.system.enums.social.ErrorCodeConstants;
 import org.springframework.cache.annotation.Cacheable;
@@ -49,7 +49,7 @@ public class RoleServiceImpl implements RoleService{
     }
 
     @Override
-    @Cacheable(value = RedisConstants.ROLE,key = "#roleId",unless = "#result == null")
+    @Cacheable(value = RedisKeyConstants.ROLE,key = "#roleId",unless = "#result == null")
     public RoleDO getRoleFromCache(Long roleId) {
         return roleMapper.selectById(roleId);
     }

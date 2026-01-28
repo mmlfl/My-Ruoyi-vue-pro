@@ -1,18 +1,21 @@
 package cn.iocoder.lfl.module.system.service.dept;
 
+import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.ObjectUtil;
+import cn.iocoder.lfl.framework.common.util.collection.CollectionUtils;
 import cn.iocoder.lfl.framework.common.util.object.BeanUtils;
 import cn.iocoder.lfl.module.system.controller.admin.dept.vo.dept.DeptListReqVO;
 import cn.iocoder.lfl.module.system.controller.admin.dept.vo.dept.DeptRespVO;
 import cn.iocoder.lfl.module.system.controller.admin.dept.vo.dept.DeptSaveReqVO;
 import cn.iocoder.lfl.module.system.dal.dataobject.dept.DeptDO;
 import cn.iocoder.lfl.module.system.dal.mysql.dept.DeptMapper;
+import cn.iocoder.lfl.module.system.dal.redis.RedisKeyConstants;
 import cn.iocoder.lfl.module.system.enums.social.ErrorCodeConstants;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 import static cn.iocoder.lfl.module.system.enums.social.ErrorCodeConstants.DEPT_EXITS_CHILDREN;
 import static cn.iocoder.lfl.module.system.exception.util.ServiceExceptionUtil.exception;
@@ -85,6 +88,30 @@ public class DeptServiceImpl implements DeptService{
     public List<DeptDO> getDeptList(DeptListReqVO reqVO) {
         List<DeptDO> deptDOS = deptMapper.selectList(reqVO);
         return deptDOS;
+    }
+
+    @Override
+    @Cacheable(cacheNames = RedisKeyConstants.DEPT_CHILDREN_ID_LIST,key = "#deptId")
+    public Set<Long> getChildDeptIdListFromCache(Long deptId) {
+        List<DeptDO> childDeptList = getChildDeptList(deptId);
+        return CollectionUtils.converSet(childDeptList,DeptDO::getId);
+    }
+
+    @Override
+    public List<DeptDO> getChildDeptList(Collection<Long> deptIds) {
+        if(CollUtil.isEmpty(deptIds)){
+            return Collections.emptyList();
+        }
+        List<DeptDO> children = new LinkedList<>();
+        for (int i = 0; i < Short.MAX_VALUE; i++) {//防止出现bug时死循环
+            List<DeptDO> deptDOS = deptMapper.selectListByParentId(deptIds);
+            if(CollUtil.isEmpty(deptDOS)){
+                break;
+            }
+            children.addAll(deptDOS);
+            deptIds = deptDOS.stream().map(DeptDO::getId).toList();
+        }
+        return children;
     }
 
 

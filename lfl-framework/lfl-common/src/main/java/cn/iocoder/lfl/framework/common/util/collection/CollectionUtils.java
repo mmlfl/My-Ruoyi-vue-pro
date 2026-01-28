@@ -21,4 +21,11 @@ public class CollectionUtils {
         }
         return from.stream().map(function).filter(Objects::nonNull).collect(Collectors.toList());
     }
+
+    public static <T> void addIfNotNull(Collection<T> coll, T item) {
+        if (item == null) {
+            return;
+        }
+        coll.add(item);
+    }
 }

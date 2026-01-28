@@ -1,5 +1,7 @@
 package cn.iocoder.lfl.framework.common.biz.system.permission;
 
+import cn.iocoder.lfl.framework.common.biz.system.permission.dto.DeptDataPermissionRespDTO;
+
 public interface PermissionCommonApi {
     /**
      * 判断是否有权限，任一一个即可
@@ -19,4 +21,5 @@ public interface PermissionCommonApi {
      */
     boolean hasAnyRoles(Long userId, String... roles);
 
+    DeptDataPermissionRespDTO getDeptDataPermission(Long id);
 }
