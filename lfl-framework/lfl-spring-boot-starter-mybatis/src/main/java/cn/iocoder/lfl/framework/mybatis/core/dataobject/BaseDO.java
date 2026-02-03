@@ -4,12 +4,14 @@ import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableLogic;
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
 @Data
+@Accessors(chain = true)
 public abstract class BaseDO implements Serializable {
     /**
      * 创建时间

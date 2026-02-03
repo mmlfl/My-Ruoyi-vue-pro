@@ -5,6 +5,8 @@
     <file url="file://$PROJECT_DIR$/lfl-dependencies/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/lfl-framework/lfl-common/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/lfl-framework/lfl-common/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/lfl-framework/lfl-spring-boot-starter-biz-data-permission/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/lfl-framework/lfl-spring-boot-starter-biz-data-permission/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/lfl-framework/lfl-spring-boot-starter-mybatis/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/lfl-framework/lfl-spring-boot-starter-mybatis/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/lfl-framework/lfl-spring-boot-starter-redis/src/main/java" charset="UTF-8" />

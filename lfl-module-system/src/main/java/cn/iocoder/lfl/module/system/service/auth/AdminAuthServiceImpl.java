@@ -1,20 +1,17 @@
 package cn.iocoder.lfl.module.system.service.auth;
 
 import cn.hutool.core.lang.UUID;
+import cn.iocoder.lfl.framework.common.enums.CommonStatusEnum;
 import cn.iocoder.lfl.framework.common.enums.UserTypeEnum;
-import cn.iocoder.lfl.framework.common.exception.enums.GlobalErrorCodeEnums;
 import cn.iocoder.lfl.framework.common.util.servlet.ServletUtils;
 import cn.iocoder.lfl.module.system.api.logger.dto.LoginLogCreateReqDTO;
 import cn.iocoder.lfl.module.system.controller.admin.auth.vo.AuthLoginReqVO;
 import cn.iocoder.lfl.module.system.controller.admin.auth.vo.AuthLoginRespVO;
-import cn.iocoder.lfl.module.system.dal.dataobject.logger.LoginLogDO;
 import cn.iocoder.lfl.module.system.enums.logger.LoginLogTypeEnum;
 import cn.iocoder.lfl.module.system.enums.logger.LoginResultEnum;
 import cn.iocoder.lfl.module.system.enums.social.ErrorCodeConstants;
 import cn.iocoder.lfl.module.system.service.logger.LoginLogService;
 import cn.iocoder.lfl.module.system.service.user.AdminUserService;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import cn.iocoder.lfl.framework.security.core.LoginUser;
 import cn.iocoder.lfl.module.system.dal.mysql.user.AdminUserMapper;
 import cn.iocoder.lfl.module.system.dal.redis.oauth2.LoginUserRedisDAO;
@@ -29,6 +26,8 @@ import java.time.ZoneId;
 import java.util.List;
 import java.util.Objects;
 
+import static cn.iocoder.lfl.module.system.enums.social.ErrorCodeConstants.AUTH_LOGIN_BAD_CREDENTIALS;
+import static cn.iocoder.lfl.module.system.enums.social.ErrorCodeConstants.AUTH_LOGIN_USER_DISABLED;
 import static cn.iocoder.lfl.module.system.exception.util.ServiceExceptionUtil.exception;
 
 
@@ -63,6 +62,27 @@ public class AdminAuthServiceImpl implements AdminAuthService {
         createLoginLog(user.getId(),user.getUsername(),
                 LoginLogTypeEnum.LOGIN_USERNAME,LoginResultEnum.SUCCESS);
         return new AuthLoginRespVO(token,loginUser);
+    }
+
+    @Override
+    public AdminUserDO authenticate(String username, String password) {
+        final LoginLogTypeEnum logTypeEnum = LoginLogTypeEnum.LOGIN_USERNAME;
+        // 校验账号是否存在
+        AdminUserDO user = userService.getUserByUsername(username);
+        if (user == null) {
+            createLoginLog(null, username, logTypeEnum, LoginResultEnum.BAD_CREDENTIALS);
+            throw exception(AUTH_LOGIN_BAD_CREDENTIALS);
+        }
+        if (!userService.isPasswordMatch(password, user.getPassword())) {
+            createLoginLog(user.getId(), username, logTypeEnum, LoginResultEnum.BAD_CREDENTIALS);
+            throw exception(AUTH_LOGIN_BAD_CREDENTIALS);
+        }
+        // 校验是否禁用
+        if (CommonStatusEnum.isDisable(user.getStatus())) {
+            createLoginLog(user.getId(), username, logTypeEnum, LoginResultEnum.USER_DISABLED);
+            throw exception(AUTH_LOGIN_USER_DISABLED);
+        }
+        return user;
     }
 
     private void createLoginLog(Long userId, String username,

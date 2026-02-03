@@ -94,7 +94,7 @@ public class DeptServiceImpl implements DeptService{
     @Cacheable(cacheNames = RedisKeyConstants.DEPT_CHILDREN_ID_LIST,key = "#deptId")
     public Set<Long> getChildDeptIdListFromCache(Long deptId) {
         List<DeptDO> childDeptList = getChildDeptList(deptId);
-        return CollectionUtils.converSet(childDeptList,DeptDO::getId);
+        return CollectionUtils.convertSet(childDeptList,DeptDO::getId);
     }
 
     @Override

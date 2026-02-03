@@ -19,4 +19,8 @@ public interface AdminUserMapper extends BaseMapperX<AdminUserDO> {
                 .orderByDesc(AdminUserDO::getId)
         );
     }
+
+    default AdminUserDO selectByUsername(String username) {
+        return selectOne(AdminUserDO::getUsername, username);
+    }
 }

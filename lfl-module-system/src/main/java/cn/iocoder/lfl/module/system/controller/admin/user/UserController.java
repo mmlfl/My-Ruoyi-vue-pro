@@ -85,8 +85,8 @@ public class UserController {
     @Operation(summary = "获得用户详情")
     @Parameter(name = "id", description = "用户编号", required = true, example = "1024")
     public CommonResult<UserRespVO> getUser(@RequestParam("id") Long id){
-        UserRespVO user = userService.getUser(id);
-        return CommonResult.success(user);
+        AdminUserDO user = userService.getUser(id);
+        return CommonResult.success(BeanUtils.toBean(user, UserRespVO.class));
     }
 
 

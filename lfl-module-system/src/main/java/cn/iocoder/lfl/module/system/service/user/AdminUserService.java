@@ -20,11 +20,15 @@ public interface AdminUserService {
 
      void updateUserLogin(Long id,String loginIp);
 
-     UserRespVO getUser(Long id);
+     AdminUserDO getUser(Long id);
 
      void updateUserPassword(Long id,String password);
 
      void updateUserStatus(Long id,Integer status);
 
      PageResult<AdminUserDO> getUserPage(UserPageReqVO reqVO);
+
+     AdminUserDO getUserByUsername(String username);
+
+     boolean isPasswordMatch(String rawPassword, String encodedPassword);
 }

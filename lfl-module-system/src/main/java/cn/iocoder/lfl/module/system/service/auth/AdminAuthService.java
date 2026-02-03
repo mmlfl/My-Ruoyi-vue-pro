@@ -7,4 +7,6 @@ import cn.iocoder.lfl.module.system.dal.dataobject.user.AdminUserDO;
 
 public interface AdminAuthService {
     AuthLoginRespVO login(AuthLoginReqVO reqVO);
+
+    AdminUserDO authenticate(String username, String password);
 }

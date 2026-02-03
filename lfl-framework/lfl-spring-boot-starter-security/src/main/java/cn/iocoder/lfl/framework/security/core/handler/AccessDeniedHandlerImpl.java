@@ -1,6 +1,6 @@
 package cn.iocoder.lfl.framework.security.core.handler;
 
-import cn.iocoder.lfl.framework.common.exception.enums.GlobalErrorCodeEnums;
+import cn.iocoder.lfl.framework.common.exception.enums.GlobalErrorCodeConstants;
 import cn.iocoder.lfl.framework.common.util.servlet.ServletUtils;
 import cn.iocoder.lfl.framework.security.core.util.SecurityFrameworkUtils;
 import lombok.extern.slf4j.Slf4j;
@@ -21,6 +21,6 @@ public class AccessDeniedHandlerImpl implements AccessDeniedHandler {
         log.warn("[commence][访问 URL({}) 时，用户({}) 权限不够]", request.getRequestURI(),
                 SecurityFrameworkUtils.getLoginUserId(), e);
         // 返回 403
-        ServletUtils.writeJSON(response, CommonResult.error(GlobalErrorCodeEnums.UNAUTHORIZED));
+        ServletUtils.writeJSON(response, CommonResult.error(GlobalErrorCodeConstants.UNAUTHORIZED));
     }
 }

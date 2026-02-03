@@ -54,4 +54,10 @@ public class LambdaQueryWrapperX<T> extends LambdaQueryWrapper<T> {
         }
         return this;
     }
+
+    @Override
+    public LambdaQueryWrapperX<T> eq(SFunction<T, ?> column, Object val) {
+        super.eq(column, val);
+        return this;
+    }
 }

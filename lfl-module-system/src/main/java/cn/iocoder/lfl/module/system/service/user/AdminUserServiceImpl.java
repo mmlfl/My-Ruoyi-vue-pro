@@ -82,13 +82,8 @@ public class AdminUserServiceImpl implements AdminUserService{
     }
 
     @Override
-    public UserRespVO getUser(Long id) {
-        AdminUserDO userDO = userMapper.selectById(id);
-        if(userDO == null){
-            return null;
-        }
-        UserRespVO respVO = BeanUtils.toBean(userDO, UserRespVO.class);
-        return respVO;
+    public AdminUserDO getUser(Long id) {
+        return userMapper.selectById(id);
     }
 
     @Override
@@ -118,6 +113,16 @@ public class AdminUserServiceImpl implements AdminUserService{
     public PageResult<AdminUserDO> getUserPage(UserPageReqVO reqVO) {
 
         return userMapper.selectPage(reqVO);
+    }
+
+    @Override
+    public AdminUserDO getUserByUsername(String username) {
+        return userMapper.selectByUsername(username);
+    }
+
+    @Override
+    public boolean isPasswordMatch(String rawPassword, String encodedPassword) {
+        return passwordEncoder.matches(rawPassword,encodedPassword);
     }
 
 

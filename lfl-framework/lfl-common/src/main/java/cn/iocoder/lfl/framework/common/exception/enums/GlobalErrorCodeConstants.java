@@ -2,7 +2,7 @@ package cn.iocoder.lfl.framework.common.exception.enums;
 
 import cn.iocoder.lfl.framework.common.exception.ErrorCode;
 
-public interface GlobalErrorCodeEnums {
+public interface GlobalErrorCodeConstants {
     ErrorCode SUCCESS = new ErrorCode(0, "成功");
 
     // ========== 客户端错误段 ==========

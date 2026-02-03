@@ -14,8 +14,10 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.Collections;
 
 public class SecurityFrameworkUtils {
-
-    public static final String AUTHORIZATION_HEADER = "Bearer";
+    /**
+     * HEADER 认证头 value 的前缀
+     */
+    public static final String AUTHORIZATION_BEARER = "Bearer";
 
     private SecurityFrameworkUtils() {}
 
@@ -36,7 +38,7 @@ public class SecurityFrameworkUtils {
         if(!StringUtils.hasText( token)){
             return null;
         }
-        int index = token.indexOf(AUTHORIZATION_HEADER+" ");
+        int index = token.indexOf(AUTHORIZATION_BEARER+" ");
         return index>=0?token.substring(index+7).trim() : token;
     }
     /**

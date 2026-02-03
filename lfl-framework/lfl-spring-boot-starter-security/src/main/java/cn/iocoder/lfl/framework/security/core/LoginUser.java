@@ -17,6 +17,8 @@ import java.util.Map;
 @AllArgsConstructor
 @Builder
 public class LoginUser {
+    public static final String INFO_KEY_NICKNAME = "nickname";
+    public static final String INFO_KEY_DEPT_ID = "deptId";
 
     /**
      * 用户编号

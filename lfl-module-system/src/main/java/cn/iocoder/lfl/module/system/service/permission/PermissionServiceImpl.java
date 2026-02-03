@@ -25,7 +25,7 @@ import javax.annotation.Resource;
 import java.util.*;
 import java.util.function.Supplier;
 
-import static cn.iocoder.lfl.framework.common.util.collection.CollectionUtils.converSet;
+import static cn.iocoder.lfl.framework.common.util.collection.CollectionUtils.convertSet;
 import static cn.iocoder.lfl.framework.common.util.collection.CollectionUtils.convertList;
 import static cn.iocoder.lfl.framework.common.util.json.JsonUtils.toJsonString;
 
@@ -65,7 +65,7 @@ public class PermissionServiceImpl implements PermissionService{
             }
         }
         //如果是超级管理员也可以直接放行
-        return roleService.hasAnySuperAdmin(converSet(roleDOS,RoleDO::getId));
+        return roleService.hasAnySuperAdmin(convertSet(roleDOS,RoleDO::getId));
     }
 
     private boolean hasAnyPermission(List<RoleDO> roleDOS, String permission) {
@@ -74,7 +74,7 @@ public class PermissionServiceImpl implements PermissionService{
         if (CollUtil.isEmpty(menuIds)) {
             return false;
         }
-        Set<Long> roleIds = CollectionUtils.converSet(roleDOS,RoleDO::getId);
+        Set<Long> roleIds = CollectionUtils.convertSet(roleDOS,RoleDO::getId);
         for(Long menuId : menuIds){
             List<Long> menuRoleIds = getSelf().getMenuRoleIdListByMenuIdFromCache(menuId);
             if(CollUtil.containsAny(menuRoleIds,roleIds)){
@@ -94,13 +94,13 @@ public class PermissionServiceImpl implements PermissionService{
         if(CollUtil.isEmpty(roleDOS)){
             return false;
         }
-        Set<String> codes = converSet(roleDOS, RoleDO::getCode);
+        Set<String> codes = convertSet(roleDOS, RoleDO::getCode);
         // 1.是否有角色
         if(CollUtil.containsAny(codes,CollUtil.newHashSet( roles))){
             return true;
         }
         // 2.是否是超级管理员
-        return roleService.hasAnySuperAdmin(converSet(roleDOS,RoleDO::getId));
+        return roleService.hasAnySuperAdmin(convertSet(roleDOS,RoleDO::getId));
     }
 
     // ========== 角色-菜单的相关方法  ========== 以下
@@ -181,7 +181,7 @@ public class PermissionServiceImpl implements PermissionService{
 
     @Override
     public Set<Long> getUserRoleIdListByUserId(Long userId) {
-        return CollectionUtils.converSet(userRoleMapper.selectListByUserId(userId), UserRoleDO::getRoleId);
+        return CollectionUtils.convertSet(userRoleMapper.selectListByUserId(userId), UserRoleDO::getRoleId);
     }
 
     @Override
