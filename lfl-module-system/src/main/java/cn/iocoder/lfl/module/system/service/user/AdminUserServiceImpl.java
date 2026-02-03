@@ -5,7 +5,6 @@ import cn.iocoder.lfl.framework.common.enums.CommonStatusEnum;
 import cn.iocoder.lfl.framework.common.pojo.PageResult;
 import cn.iocoder.lfl.framework.common.util.object.BeanUtils;
 import cn.iocoder.lfl.module.system.controller.admin.user.vo.user.UserPageReqVO;
-import cn.iocoder.lfl.module.system.controller.admin.user.vo.user.UserRespVO;
 import cn.iocoder.lfl.module.system.controller.admin.user.vo.user.UserSaveReqVO;
 import cn.iocoder.lfl.module.system.dal.dataobject.user.AdminUserDO;
 import cn.iocoder.lfl.module.system.dal.mysql.user.AdminUserMapper;
@@ -19,7 +18,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
-import static cn.iocoder.lfl.module.system.exception.util.ServiceExceptionUtil.exception;
+import static cn.iocoder.lfl.framework.common.exception.util.ServiceExceptionUtil.exception;
 import static cn.iocoder.lfl.module.system.enums.social.ErrorCodeConstants.*;
 @Service
 public class AdminUserServiceImpl implements AdminUserService{

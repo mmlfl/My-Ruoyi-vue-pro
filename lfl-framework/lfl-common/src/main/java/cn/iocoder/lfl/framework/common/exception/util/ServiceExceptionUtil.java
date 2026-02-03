@@ -1,7 +1,7 @@
-package cn.iocoder.lfl.module.system.exception.util;
+package cn.iocoder.lfl.framework.common.exception.util;
 
 import cn.iocoder.lfl.framework.common.exception.ErrorCode;
-import cn.iocoder.lfl.module.system.exception.ServiceException;
+import cn.iocoder.lfl.framework.common.exception.ServiceException;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j

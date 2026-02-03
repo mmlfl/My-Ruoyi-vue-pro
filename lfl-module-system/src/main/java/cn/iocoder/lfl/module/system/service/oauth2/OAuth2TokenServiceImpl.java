@@ -27,7 +27,7 @@ import java.util.List;
 import java.util.Map;
 
 import static cn.iocoder.lfl.framework.common.util.collection.CollectionUtils.convertSet;
-import static cn.iocoder.lfl.module.system.exception.util.ServiceExceptionUtil.exception0;
+import static cn.iocoder.lfl.framework.common.exception.util.ServiceExceptionUtil.exception0;
 
 @Service
 public class OAuth2TokenServiceImpl implements OAuth2TokenService {

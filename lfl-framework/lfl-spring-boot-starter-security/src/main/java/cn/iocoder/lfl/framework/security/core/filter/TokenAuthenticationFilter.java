@@ -3,6 +3,7 @@ package cn.iocoder.lfl.framework.security.core.filter;
 import cn.hutool.core.util.StrUtil;
 import cn.iocoder.lfl.framework.common.biz.system.oauth2.DTO.OAuth2AccessTokenCheckRespDTO;
 import cn.iocoder.lfl.framework.common.biz.system.oauth2.OAuth2TokenCommonApi;
+import cn.iocoder.lfl.framework.common.exception.ServiceException;
 import cn.iocoder.lfl.framework.security.core.LoginUser;
 import cn.iocoder.lfl.framework.security.config.SecurityProperties;
 import cn.iocoder.lfl.framework.security.core.util.SecurityFrameworkUtils;
@@ -37,17 +38,19 @@ public class TokenAuthenticationFilter extends OncePerRequestFilter{
 
 
     private LoginUser buildLoginUserByToken(String token){
-        OAuth2AccessTokenCheckRespDTO accessToken = oAuth2TokenCommonApi.checkAccessToken(token);
-        if(accessToken ==null){
+        try {
+            OAuth2AccessTokenCheckRespDTO accessToken = oAuth2TokenCommonApi.checkAccessToken(token);
+            if(accessToken ==null){
+                return null;
+            }
+            // 构建登录用户
+            return new LoginUser().setId(accessToken.getUserId()).setUserType(accessToken.getUserType())
+                    .setInfo(accessToken.getUserInfo()) // 额外的用户信息
+                    .setTenantId(accessToken.getTenantId()).setScopes(accessToken.getScopes())
+                    .setExpiresTime(accessToken.getExpiresTime());
+        } catch (ServiceException serviceException) {
+            // 校验 Token 不通过时，考虑到一些接口是无需登录的，所以直接返回 null 即可
             return null;
         }
-        return LoginUser.builder()
-                .id(accessToken.getUserId())
-                .userType(accessToken.getUserType())
-                .info(accessToken.getUserInfo())
-                .tenantId(accessToken.getTenantId())
-                .scopes(accessToken.getScopes())
-                .expiresTime(accessToken.getExpiresTime())
-                .build();
-            }
-}
+        }
+    }

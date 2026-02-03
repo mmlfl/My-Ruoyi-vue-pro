@@ -20,7 +20,7 @@ import javax.annotation.Resource;
 import java.util.Comparator;
 import java.util.List;
 
-import static cn.iocoder.lfl.module.system.exception.util.ServiceExceptionUtil.exception;
+import static cn.iocoder.lfl.framework.common.exception.util.ServiceExceptionUtil.exception;
 
 @Service
 public class MenuServiceImpl implements MenuService{

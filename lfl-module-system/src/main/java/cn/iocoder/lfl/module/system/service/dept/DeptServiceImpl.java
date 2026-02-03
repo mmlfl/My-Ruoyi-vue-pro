@@ -18,7 +18,7 @@ import javax.annotation.Resource;
 import java.util.*;
 
 import static cn.iocoder.lfl.module.system.enums.social.ErrorCodeConstants.DEPT_EXITS_CHILDREN;
-import static cn.iocoder.lfl.module.system.exception.util.ServiceExceptionUtil.exception;
+import static cn.iocoder.lfl.framework.common.exception.util.ServiceExceptionUtil.exception;
 
 @Service
 public class DeptServiceImpl implements DeptService{

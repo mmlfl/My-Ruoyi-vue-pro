@@ -39,7 +39,7 @@ import java.util.Map;
 import static cn.iocoder.lfl.framework.common.exception.enums.GlobalErrorCodeConstants.BAD_REQUEST;
 import static cn.iocoder.lfl.framework.common.pojo.CommonResult.success;
 import static cn.iocoder.lfl.framework.security.core.util.SecurityFrameworkUtils.getLoginUserId;
-import static cn.iocoder.lfl.module.system.exception.util.ServiceExceptionUtil.exception0;
+import static cn.iocoder.lfl.framework.common.exception.util.ServiceExceptionUtil.exception0;
 
 @Tag(name = "管理后台 - OAuth2.0 授权")
 @RestController

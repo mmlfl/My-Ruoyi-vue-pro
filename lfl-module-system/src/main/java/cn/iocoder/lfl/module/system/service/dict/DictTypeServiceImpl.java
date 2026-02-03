@@ -15,7 +15,7 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import java.util.List;
 
-import static cn.iocoder.lfl.module.system.exception.util.ServiceExceptionUtil.exception;
+import static cn.iocoder.lfl.framework.common.exception.util.ServiceExceptionUtil.exception;
 
 @Service
 public class DictTypeServiceImpl implements DictTypeService{

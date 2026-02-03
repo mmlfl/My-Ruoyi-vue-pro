@@ -24,7 +24,6 @@ public class AuthController {
         return success(adminAuthService.login(reqVO));
     }
 
-    @PreAuthorize("@ss.hasPermission('system_auth_test')")
     @GetMapping("test")
     public String test(){
         return "你成功访问了 Test 类!";

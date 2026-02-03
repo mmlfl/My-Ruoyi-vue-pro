@@ -11,7 +11,6 @@ import cn.iocoder.lfl.module.system.dal.dataobject.dict.DictTypeDO;
 import cn.iocoder.lfl.module.system.dal.mysql.dict.DictDataMapper;
 import cn.iocoder.lfl.module.system.dal.mysql.dict.DictTypeMapper;
 import cn.iocoder.lfl.module.system.enums.social.ErrorCodeConstants;
-import cn.iocoder.lfl.module.system.exception.util.ServiceExceptionUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,7 +18,7 @@ import javax.annotation.Resource;
 
 import java.util.List;
 
-import static cn.iocoder.lfl.module.system.exception.util.ServiceExceptionUtil.exception;
+import static cn.iocoder.lfl.framework.common.exception.util.ServiceExceptionUtil.exception;
 
 @Service
 public class DictDataServiceImpl implements DictDataService{

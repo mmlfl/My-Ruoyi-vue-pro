@@ -11,7 +11,7 @@ import java.util.List;
 
 import static cn.iocoder.lfl.module.system.enums.social.ErrorCodeConstants.OAUTH2_CODE_EXPIRE;
 import static cn.iocoder.lfl.module.system.enums.social.ErrorCodeConstants.OAUTH2_CODE_NOT_EXISTS;
-import static cn.iocoder.lfl.module.system.exception.util.ServiceExceptionUtil.exception;
+import static cn.iocoder.lfl.framework.common.exception.util.ServiceExceptionUtil.exception;
 
 public class OAuth2CodeServiceImpl implements OAuth2CodeService{
     /**

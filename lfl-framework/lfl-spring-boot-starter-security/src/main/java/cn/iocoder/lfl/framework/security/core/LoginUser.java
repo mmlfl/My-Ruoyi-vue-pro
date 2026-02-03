@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.experimental.Accessors;
 
 import java.time.LocalDateTime;
 import java.util.HashMap;
@@ -15,7 +16,7 @@ import java.util.Map;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
+@Accessors(chain = true)
 public class LoginUser {
     public static final String INFO_KEY_NICKNAME = "nickname";
     public static final String INFO_KEY_DEPT_ID = "deptId";

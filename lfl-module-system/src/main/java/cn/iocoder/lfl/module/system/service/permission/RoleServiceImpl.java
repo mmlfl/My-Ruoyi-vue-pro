@@ -21,7 +21,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
-import static cn.iocoder.lfl.module.system.exception.util.ServiceExceptionUtil.exception;
+import static cn.iocoder.lfl.framework.common.exception.util.ServiceExceptionUtil.exception;
 
 @Service
 public class RoleServiceImpl implements RoleService{

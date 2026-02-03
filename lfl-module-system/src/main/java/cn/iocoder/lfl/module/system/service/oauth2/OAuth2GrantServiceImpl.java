@@ -9,13 +9,12 @@ import cn.iocoder.lfl.module.system.dal.dataobject.oauth2.OAuth2CodeDO;
 import cn.iocoder.lfl.module.system.dal.dataobject.user.AdminUserDO;
 import cn.iocoder.lfl.module.system.enums.social.ErrorCodeConstants;
 import cn.iocoder.lfl.module.system.service.auth.AdminAuthService;
-import cn.iocoder.lfl.module.system.service.user.AdminUserService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.List;
 
-import static cn.iocoder.lfl.module.system.exception.util.ServiceExceptionUtil.exception;
+import static cn.iocoder.lfl.framework.common.exception.util.ServiceExceptionUtil.exception;
 
 @Service
 public class OAuth2GrantServiceImpl implements OAuth2GrantService{

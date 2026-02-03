@@ -1,4 +1,4 @@
-package cn.iocoder.lfl.module.system.exception;
+package cn.iocoder.lfl.framework.common.exception;
 
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.StrUtil;

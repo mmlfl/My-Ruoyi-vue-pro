@@ -12,7 +12,6 @@ import cn.iocoder.lfl.module.system.controller.admin.oauth2.vo.client.OAuth2Clie
 import cn.iocoder.lfl.module.system.dal.dataobject.oauth2.OAuth2ClientDO;
 import cn.iocoder.lfl.module.system.dal.mysql.oauth2.OAuth2ClientMapper;
 import cn.iocoder.lfl.module.system.dal.redis.RedisKeyConstants;
-import jodd.util.CollectionUtil;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
@@ -21,7 +20,7 @@ import javax.annotation.Resource;
 import java.util.Collection;
 import java.util.List;
 
-import static cn.iocoder.lfl.module.system.exception.util.ServiceExceptionUtil.exception;
+import static cn.iocoder.lfl.framework.common.exception.util.ServiceExceptionUtil.exception;
 import static cn.iocoder.lfl.module.system.enums.social.ErrorCodeConstants.*;
 
 @Service
